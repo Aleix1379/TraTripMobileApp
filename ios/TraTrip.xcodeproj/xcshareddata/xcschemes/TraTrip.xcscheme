@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "TraTripMobileApp.app"
-               BlueprintName = "TraTripMobileApp"
-               ReferencedContainer = "container:TraTripMobileApp.xcodeproj">
+               BuildableName = "TraTrip.app"
+               BlueprintName = "TraTrip"
+               ReferencedContainer = "container:TraTrip.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "TraTripMobileAppTests.xctest"
-               BlueprintName = "TraTripMobileAppTests"
-               ReferencedContainer = "container:TraTripMobileApp.xcodeproj">
+               BuildableName = "TraTripTests.xctest"
+               BlueprintName = "TraTripTests"
+               ReferencedContainer = "container:TraTrip.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "TraTripMobileApp.app"
-            BlueprintName = "TraTripMobileApp"
-            ReferencedContainer = "container:TraTripMobileApp.xcodeproj">
+            BuildableName = "TraTrip.app"
+            BlueprintName = "TraTrip"
+            ReferencedContainer = "container:TraTrip.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "TraTripMobileApp.app"
-            BlueprintName = "TraTripMobileApp"
-            ReferencedContainer = "container:TraTripMobileApp.xcodeproj">
+            BuildableName = "TraTrip.app"
+            BlueprintName = "TraTrip"
+            ReferencedContainer = "container:TraTrip.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
