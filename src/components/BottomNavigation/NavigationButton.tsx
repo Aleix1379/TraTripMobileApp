@@ -16,7 +16,6 @@ interface NavButtonProps {
 
 const NavButton: React.FC<NavButtonProps> = ({ label, to, icon, isActive }) => {
   const navigation = useNavigation<homeScreenProp>()
-  const buttonColor = '#fff'
   const theme = useTheme()
   const { colors } = theme
 
@@ -25,7 +24,7 @@ const NavButton: React.FC<NavButtonProps> = ({ label, to, icon, isActive }) => {
       <Home
         color="#fff"
         size={'medium'}
-        primaryColor={buttonColor}
+        primaryColor={colors.TEXT}
         filled={true}
       />
     ),
@@ -33,7 +32,7 @@ const NavButton: React.FC<NavButtonProps> = ({ label, to, icon, isActive }) => {
       <Location
         color="#fff"
         size={'medium'}
-        primaryColor={buttonColor}
+        primaryColor={colors.TEXT}
         filled={true}
       />
     ),
@@ -41,7 +40,7 @@ const NavButton: React.FC<NavButtonProps> = ({ label, to, icon, isActive }) => {
       <Notification
         color="#fff"
         size={'medium'}
-        primaryColor={buttonColor}
+        primaryColor={colors.TEXT}
         filled={true}
       />
     ),
@@ -49,7 +48,7 @@ const NavButton: React.FC<NavButtonProps> = ({ label, to, icon, isActive }) => {
       <Heart
         color="#fff"
         size={'medium'}
-        primaryColor={buttonColor}
+        primaryColor={colors.TEXT}
         filled={true}
       />
     )

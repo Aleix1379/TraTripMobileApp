@@ -13,12 +13,14 @@ const common = {
 
 const light = {
   ...common,
-  BACKGROUND: FULL_WHITE
+  BACKGROUND: FULL_WHITE,
+  TEXT: MEDIUM_BLACK
 }
 
 const dark = {
   ...common,
-  BACKGROUND: DARK_BG
+  BACKGROUND: DARK_BG,
+  TEXT: FULL_WHITE
 }
 
 export const colors = { light, dark }
