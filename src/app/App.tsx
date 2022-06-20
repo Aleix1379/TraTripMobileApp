@@ -18,7 +18,6 @@ const App = () => {
   const { colors } = theme
 
   const navigatorOptions = {
-    headerShown: false,
     cardStyle: { backgroundColor: 'transparent' },
     cardStyleInterpolator: ({ current: { progress } }) => ({
       cardStyle: {
