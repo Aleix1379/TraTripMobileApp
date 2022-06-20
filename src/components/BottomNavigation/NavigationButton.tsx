@@ -1,9 +1,15 @@
 import { View, Text, StyleSheet } from 'react-native'
-import { Heart, Home, Location, Notification } from 'react-native-iconly'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import useTheme from '../../styles/useTheme'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import {
+  faHome,
+  faCompass,
+  faBell,
+  faHeart
+} from '@fortawesome/free-solid-svg-icons'
 
 type homeScreenProp = StackNavigationProp<any>
 
@@ -20,52 +26,27 @@ const NavButton: React.FC<NavButtonProps> = ({ label, to, icon, isActive }) => {
   const { colors } = theme
 
   const icons = {
-    home: (
-      <Home
-        color="#fff"
-        size={'medium'}
-        primaryColor={colors.TEXT}
-        filled={true}
-      />
-    ),
-    location: (
-      <Location
-        color="#fff"
-        size={'medium'}
-        primaryColor={colors.TEXT}
-        filled={true}
-      />
-    ),
-    notification: (
-      <Notification
-        color="#fff"
-        size={'medium'}
-        primaryColor={colors.TEXT}
-        filled={true}
-      />
-    ),
-    heart: (
-      <Heart
-        color="#fff"
-        size={'medium'}
-        primaryColor={colors.TEXT}
-        filled={true}
-      />
-    )
+    home: faHome,
+    location: faCompass,
+    notification: faBell,
+    heart: faHeart
   }
 
   return (
-    <View
-      onTouchEnd={() => navigation.navigate(to)}
-      style={[styles.bar, { backgroundColor: colors.BACKGROUND }]}>
+    <View style={[styles.bar, { backgroundColor: colors.BACKGROUND }]}>
       <View
+        onTouchEnd={() => navigation.navigate(to)}
         style={[
           styles.item,
           {
             backgroundColor: isActive ? colors.ACCENT : 'transparent'
           }
         ]}>
-        {icons[icon]}
+        <FontAwesomeIcon
+          icon={icons[icon]}
+          size={22}
+          style={{ color: colors.TEXT }}
+        />
         {isActive && <Text style={styles.label}>{label}</Text>}
       </View>
     </View>
