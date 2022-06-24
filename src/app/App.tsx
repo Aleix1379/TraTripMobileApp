@@ -10,6 +10,7 @@ import ThemeProvider from '../styles/ThemeProvider'
 import Notifications from '../screens/Notifications'
 import Saved from '../screens/Saved'
 import useTheme from '../styles/useTheme'
+import TripDetails from '../screens/TripDetails'
 
 const Stack = createStackNavigator()
 
@@ -62,6 +63,15 @@ const App = () => {
               name="Saved"
               component={Saved}
               options={{ header: Header }}
+            />
+            <Stack.Screen
+              name="TripDetails"
+              component={TripDetails}
+              options={{
+                title: '',
+                headerTransparent: true,
+                headerTintColor: colors.TEXT
+              }}
             />
           </Stack.Navigator>
           <NavigationBar />

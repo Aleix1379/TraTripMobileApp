@@ -11,9 +11,14 @@ import {
 import useTheme from '../styles/useTheme'
 import SearchBar from '../components/SearchBar'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCircle, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import SelectItems from '../components/SelectItems'
 
 const POPULAR_IMAGE_SIZE = 60
+
+type homeScreenProp = StackNavigationProp<any>
 
 interface HomeState {
   popularCategory: {
@@ -24,6 +29,7 @@ interface HomeState {
 }
 
 const Home = () => {
+  const navigation = useNavigation<homeScreenProp>()
   const theme = useTheme()
   const { colors } = theme
   const [categories] = useState<Array<string>>([
@@ -33,9 +39,6 @@ const Home = () => {
     'Asia',
     'Oceania'
   ])
-  const [categorySelected, setCategorySelected] = useState<string>(
-    categories[0]
-  )
   const [popularCategories] = useState<HomeState['popularCategories']>([
     {
       image: require('../../assets/images/trips.png'),
@@ -71,13 +74,15 @@ const Home = () => {
     }
   ])
 
-  const isCategoryActive = (category: string) => category === categorySelected
-
   const getTripImageSize = () => {
     return {
       with: Dimensions.get('window').width * 0.65,
       height: Dimensions.get('window').width * 0.65 * 1.22
     }
+  }
+
+  const loadTripsByCategory = (newCategory: string) => {
+    console.info('loadTripsByCategory:', newCategory)
   }
 
   return (
@@ -90,33 +95,19 @@ const Home = () => {
 
       <SearchBar style={styles.searchBar} />
 
-      <View style={styles.categories}>
-        {categories.map((category, index) => (
-          <View
-            style={styles.category}
-            key={index}
-            onTouchEnd={() => setCategorySelected(category)}>
-            <Text
-              style={{
-                fontSize: 18,
-                color: isCategoryActive(category) ? colors.ACCENT : colors.GREY
-              }}>
-              {category}
-            </Text>
-            {isCategoryActive(category) && (
-              <FontAwesomeIcon
-                icon={faCircle}
-                size={6}
-                style={{ marginTop: 5, color: colors.ACCENT }}
-              />
-            )}
-          </View>
-        ))}
-      </View>
+      <SelectItems
+        items={categories}
+        onItemChange={loadTripsByCategory}
+        style={{ marginTop: 40 }}
+      />
 
       <ScrollView horizontal={true} style={styles.trips}>
         {trips.map((trip, index) => (
-          <View key={trip.id}>
+          <View
+            key={trip.id}
+            onTouchEnd={() =>
+              navigation.navigate('TripDetails', { id: trip.id })
+            }>
             <View
               style={[
                 styles.tripOverlay,
@@ -209,14 +200,7 @@ const styles = StyleSheet.create({
   searchBar: {
     marginTop: 40
   },
-  categories: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 40
-  },
-  category: {
-    alignItems: 'center'
-  },
+
   trips: {
     marginTop: 20,
     flexDirection: 'row'
