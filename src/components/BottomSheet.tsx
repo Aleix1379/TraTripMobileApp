@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 45,
     borderTopRightRadius: 45,
     paddingHorizontal: 25,
-    paddingVertical: 20,
+    paddingTop: 20,
     marginTop: 'auto'
   }
 })

@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from '../components/Header'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Home from '../screens/Home'
@@ -12,6 +11,9 @@ import Saved from '../screens/Saved'
 import useTheme from '../styles/useTheme'
 import TripDetails from '../screens/TripDetails'
 import TourDetails from '../screens/TourDetails'
+import HomeHeader from '../components/Header/HeaderHome'
+import HeaderDetail from '../components/Header/HeaderDetail'
+import HeaderExplore from '../components/Header/HeaderExplore'
 
 const Stack = createStackNavigator()
 
@@ -48,39 +50,37 @@ const App = () => {
             <Stack.Screen
               name="Home"
               component={Home}
-              options={{ header: () => <Header showIcon={true} /> }}
+              options={{ header: () => <HomeHeader /> }}
             />
             <Stack.Screen
               name="Explore"
               component={Explore}
-              options={{ header: () => <Header showSearch={true} /> }}
+              options={{ header: () => <HeaderExplore /> }}
             />
             <Stack.Screen
               name="News"
               component={Notifications}
-              options={{ header: () => <Header /> }}
+              options={{ header: () => <HeaderExplore /> }}
             />
             <Stack.Screen
               name="Saved"
               component={Saved}
-              options={{ header: () => <Header /> }}
+              options={{ header: () => <HeaderExplore /> }}
             />
             <Stack.Screen
               name="TripDetails"
               component={TripDetails}
               options={{
-                title: '',
-                headerTransparent: true,
-                headerTintColor: colors.TEXT
+                header: () => <HeaderDetail />,
+                headerTransparent: true
               }}
             />
             <Stack.Screen
               name="TourDetails"
               component={TourDetails}
               options={{
-                title: '',
-                headerTransparent: true,
-                headerTintColor: colors.TEXT
+                header: () => <HeaderDetail />,
+                headerTransparent: true
               }}
             />
           </Stack.Navigator>

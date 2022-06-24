@@ -1,15 +1,25 @@
 import React, { useState } from 'react'
-import { Image, ScrollView, StyleSheet, View } from 'react-native'
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import { Text } from 'react-native'
 import useTheme from '../styles/useTheme'
 import { Product } from '../types/product'
 import ProductSelector from '../components/ProductSelector'
 
+interface ExploreProps {
+  navigation: any
+}
+
 interface ExploreState {
   typeOfTours: Array<Product>
 }
 
-const Explore = () => {
+const Explore: React.FC<ExploreProps> = ({ navigation }) => {
   const theme = useTheme()
   const { colors } = theme
 
@@ -40,6 +50,10 @@ const Explore = () => {
     console.log('selectTypeOfTour', typeOfTour)
   }
 
+  const goToTourDetails = (id: number) => {
+    navigation.navigate('TourDetails', { id })
+  }
+
   return (
     <ScrollView
       style={[styles.explore, { backgroundColor: colors.BACKGROUND }]}>
@@ -55,24 +69,32 @@ const Explore = () => {
 
       <View style={styles.images}>
         <View style={[styles.imageContainer, { marginRight: '2.5%' }]}>
-          <Image
-            style={styles.image}
-            source={require('../../assets/images/adventure-1.png')}
-          />
-          <Image
-            style={styles.image}
-            source={require('../../assets/images/adventure-2.png')}
-          />
+          <TouchableOpacity onPress={() => goToTourDetails(1)}>
+            <Image
+              style={styles.image}
+              source={require('../../assets/images/adventure-1.png')}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => goToTourDetails(1)}>
+            <Image
+              style={styles.image}
+              source={require('../../assets/images/adventure-2.png')}
+            />
+          </TouchableOpacity>
         </View>
         <View style={[styles.imageContainer, { marginLeft: '2.5%' }]}>
-          <Image
-            style={styles.image}
-            source={require('../../assets/images/adventure-3.png')}
-          />
-          <Image
-            style={styles.image}
-            source={require('../../assets/images/adventure-4.png')}
-          />
+          <TouchableOpacity onPress={() => goToTourDetails(1)}>
+            <Image
+              style={styles.image}
+              source={require('../../assets/images/adventure-3.png')}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => goToTourDetails(1)}>
+            <Image
+              style={styles.image}
+              source={require('../../assets/images/adventure-4.png')}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>

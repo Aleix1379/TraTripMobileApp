@@ -1,42 +1,30 @@
 import React from 'react'
 import { Image, StyleSheet, View } from 'react-native'
-import useTheme from '../styles/useTheme'
+import useTheme from '../../styles/useTheme'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
-import SearchBar from './SearchBar'
 
 const ICON_SIZE = 26
 
-interface HeaderProps {
-  showSearch?: boolean
-  showIcon?: boolean
-}
-
-const Header: React.FC<HeaderProps> = ({
-  showSearch = false,
-  showIcon = false
-}) => {
+const HeaderHome: React.FC = () => {
   const theme = useTheme()
   const { colors } = theme
 
   return (
     <View style={[styles.header, { backgroundColor: colors.BACKGROUND }]}>
-      {showIcon && (
-        <View
-          style={{
-            backgroundColor: colors.ACCENT,
-            height: ICON_SIZE,
-            width: ICON_SIZE,
-            borderRadius: ICON_SIZE / 2,
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-          <FontAwesomeIcon icon={faPaperPlane} color={colors.TEXT} size={14} />
-        </View>
-      )}
-      {showSearch && <SearchBar style={styles.searchBar} />}
+      <View
+        style={{
+          backgroundColor: colors.ACCENT,
+          height: ICON_SIZE,
+          width: ICON_SIZE,
+          borderRadius: ICON_SIZE / 2,
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+        <FontAwesomeIcon icon={faPaperPlane} color={colors.TEXT} size={14} />
+      </View>
       <Image
-        source={require('../../assets/images/avatar.png')}
+        source={require('../../../assets/images/avatar.png')}
         style={styles.avatar}
       />
     </View>
@@ -63,4 +51,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Header
+export default HeaderHome
