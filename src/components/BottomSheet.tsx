@@ -1,17 +1,18 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native'
 import useTheme from '../styles/useTheme'
 
 interface BottomSheetProps {
   children: React.ReactNode
+  style?: StyleProp<ViewStyle>
 }
 
-const BottomSheet: React.FC<BottomSheetProps> = ({ children }) => {
+const BottomSheet: React.FC<BottomSheetProps> = ({ children, style }) => {
   const theme = useTheme()
   const { colors } = theme
 
   return (
-    <View style={[styles.info, { backgroundColor: colors.SHADOW }]}>
+    <View style={[styles.info, { backgroundColor: colors.SHADOW }, style]}>
       {children}
     </View>
   )

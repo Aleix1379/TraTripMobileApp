@@ -119,7 +119,7 @@ const TripDetails: React.FC<TripDetailsProps> = ({ route }) => {
           }
         ]}>
         <Image style={styles.image} source={trip.image} />
-        <BottomSheet>
+        <BottomSheet style={{ paddingBottom: 20 }}>
           <View style={styles.header}>
             <Text style={[styles.title, { color: colors.TEXT }]}>
               {trip.city},{' '}
