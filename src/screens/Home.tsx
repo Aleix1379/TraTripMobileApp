@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover'
   },
   tripOverlay: {
-    backgroundColor: 'rgba(33, 33, 33, 0.5)',
+    backgroundColor: 'rgba(33, 33, 33, 0.6)',
     position: 'absolute',
     top: 0,
     left: 0,

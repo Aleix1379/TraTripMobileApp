@@ -13,6 +13,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import SelectItems from '../components/SelectItems'
 import TripItemDetail from '../components/TripItemDetail'
 import Button from '../components/Button'
+import BottomSheet from '../components/BottomSheet'
 
 interface TripDetailsProps {
   route: any
@@ -118,7 +119,7 @@ const TripDetails: React.FC<TripDetailsProps> = ({ route }) => {
           }
         ]}>
         <Image style={styles.image} source={trip.image} />
-        <View style={[styles.info, { backgroundColor: colors.SHADOW }]}>
+        <BottomSheet>
           <View style={styles.header}>
             <Text style={[styles.title, { color: colors.TEXT }]}>
               {trip.city},{' '}
@@ -163,7 +164,9 @@ const TripDetails: React.FC<TripDetailsProps> = ({ route }) => {
             </Text>
           )}
           {tabSelected === 'costs' && (
-            <Text style={{ color: colors.GREY }}>{trip.information.costs}</Text>
+            <Text style={[styles.description, { color: colors.GREY }]}>
+              {trip.information.costs}
+            </Text>
           )}
 
           <View
@@ -191,42 +194,43 @@ const TripDetails: React.FC<TripDetailsProps> = ({ route }) => {
               style={{ width: '55%' }}
             />
           </View>
-        </View>
+        </BottomSheet>
       </View>
     )
   )
 }
 
 const styles = StyleSheet.create({
-  tripDetails: {},
+  tripDetails: {
+    flex: 1
+  },
   image: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.6
+    height: Dimensions.get('window').height * 0.5,
+    position: 'absolute'
   },
-  info: {
-    borderTopLeftRadius: 45,
-    borderTopRightRadius: 45,
-    paddingHorizontal: 25,
-    paddingVertical: 20,
-    height: 400,
-    bottom: 120
-  },
+
   header: {
     flexDirection: 'row',
     alignItems: 'center'
   },
   title: {
-    fontSize: 30
+    fontSize: 30,
+    marginTop: 10
   },
   score: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 15
+    marginTop: 15,
+    marginBottom: 5
   },
   description: {
-    lineHeight: 22
+    lineHeight: 22,
+    marginVertical: 10,
+    height: 50
   },
   controls: {
+    marginTop: 30,
     flexDirection: 'row',
     justifyContent: 'space-between'
   }
