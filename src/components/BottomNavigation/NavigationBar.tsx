@@ -17,8 +17,6 @@ const NavigationBar: React.FC<BottomNavigationProps> = () => {
     if (navigationState) {
       const currentRoute =
         navigationState.routes[navigationState.routes.length - 1].name
-      console.info('currentRoute:', currentRoute)
-      console.info('navigationState:', navigationState)
       setCurrentScreen(currentRoute)
       setIsInDetailPage(isDetailPage(currentRoute))
     } else {
