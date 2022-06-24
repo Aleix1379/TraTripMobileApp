@@ -11,6 +11,7 @@ import Notifications from '../screens/Notifications'
 import Saved from '../screens/Saved'
 import useTheme from '../styles/useTheme'
 import TripDetails from '../screens/TripDetails'
+import TourDetails from '../screens/TourDetails'
 
 const Stack = createStackNavigator()
 
@@ -47,26 +48,35 @@ const App = () => {
             <Stack.Screen
               name="Home"
               component={Home}
-              options={{ header: Header }}
+              options={{ header: () => <Header showIcon={true} /> }}
             />
             <Stack.Screen
               name="Explore"
               component={Explore}
-              options={{ header: Header }}
+              options={{ header: () => <Header showSearch={true} /> }}
             />
             <Stack.Screen
               name="News"
               component={Notifications}
-              options={{ header: Header }}
+              options={{ header: () => <Header /> }}
             />
             <Stack.Screen
               name="Saved"
               component={Saved}
-              options={{ header: Header }}
+              options={{ header: () => <Header /> }}
             />
             <Stack.Screen
               name="TripDetails"
               component={TripDetails}
+              options={{
+                title: '',
+                headerTransparent: true,
+                headerTintColor: colors.TEXT
+              }}
+            />
+            <Stack.Screen
+              name="TourDetails"
+              component={TourDetails}
               options={{
                 title: '',
                 headerTransparent: true,

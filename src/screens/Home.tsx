@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import {
   Dimensions,
   Image,
-  ImageSourcePropType,
   ScrollView,
   StyleSheet,
   Text,
@@ -15,17 +14,13 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import SelectItems from '../components/SelectItems'
-
-const POPULAR_IMAGE_SIZE = 60
+import ProductSelector from '../components/ProductSelector'
+import { Product } from '../types/product'
 
 type homeScreenProp = StackNavigationProp<any>
 
 interface HomeState {
-  popularCategory: {
-    name: string
-    image: ImageSourcePropType
-  }
-  popularCategories: Array<HomeState['popularCategory']>
+  popularCategories: Array<Product>
 }
 
 const Home = () => {
@@ -41,18 +36,22 @@ const Home = () => {
   ])
   const [popularCategories] = useState<HomeState['popularCategories']>([
     {
+      id: 1,
       image: require('../../assets/images/trips.png'),
       name: 'Trips'
     },
     {
+      id: 2,
       image: require('../../assets/images/hotel.png'),
       name: 'Hotel'
     },
     {
+      id: 3,
       image: require('../../assets/images/transport.png'),
       name: 'Transport'
     },
     {
+      id: 4,
       image: require('../../assets/images/events.png'),
       name: 'Events'
     }
@@ -83,6 +82,10 @@ const Home = () => {
 
   const loadTripsByCategory = (newCategory: string) => {
     console.info('loadTripsByCategory:', newCategory)
+  }
+
+  const selectCategory = (product: Product) => {
+    console.info('choose category:', product)
   }
 
   return (
@@ -178,14 +181,11 @@ const Home = () => {
       <Text style={[styles.popularCategoryTitle, { color: colors.GREY }]}>
         Popular Categories
       </Text>
-      <View style={styles.popularCategories}>
-        {popularCategories.map((popularCategory, index) => (
-          <View style={styles.popularCategory} key={index}>
-            <Image source={popularCategory.image} style={styles.popularImage} />
-            <Text>{popularCategory.name}</Text>
-          </View>
-        ))}
-      </View>
+      <ProductSelector
+        style={styles.popularCategories}
+        items={popularCategories}
+        onProductSelected={selectCategory}
+      />
     </ScrollView>
   )
 }
@@ -233,17 +233,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   popularCategories: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     marginBottom: 15
-  },
-  popularCategory: {
-    alignItems: 'center'
-  },
-  popularImage: {
-    width: POPULAR_IMAGE_SIZE,
-    height: POPULAR_IMAGE_SIZE,
-    marginBottom: 10
   }
 })
 
