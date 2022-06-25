@@ -12,6 +12,7 @@ import BottomSheet from '../components/BottomSheet'
 import { Tour } from '../types/Tour'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
+import Score from '../components/Score'
 
 interface TourDetailsProps {
   route: any
@@ -27,6 +28,7 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
       id: 1,
       city: 'Singapore City',
       image: require('../../assets/images/signapore.png'),
+      score: 4,
       details: {
         price: '$2000',
         duration: '7 days',
@@ -114,6 +116,15 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
           }}>
           {selectedTour.city}
         </Text>
+        <View
+          style={{
+            backgroundColor: 'rgba(34,34,34,0.85)',
+            paddingHorizontal: 8,
+            paddingBottom: 8,
+            paddingTop: 15
+          }}>
+          <Score score={selectedTour.score} />
+        </View>
       </View>
       <BottomSheet>
         <View style={styles.header}>

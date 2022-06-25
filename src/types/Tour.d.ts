@@ -19,5 +19,6 @@ export interface Tour {
   id: number
   city: string
   image: number
+  score: number
   details: Details
 }
