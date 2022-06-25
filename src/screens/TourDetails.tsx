@@ -60,7 +60,6 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
     const data = tours.find(tour => tour.id === id)
     if (data) {
       setSelectedTour(data)
-      console.info(JSON.stringify(data))
     }
   }, [])
 

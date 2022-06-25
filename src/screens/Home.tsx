@@ -80,13 +80,9 @@ const Home = () => {
     }
   }
 
-  const loadTripsByCategory = (newCategory: string) => {
-    console.info('loadTripsByCategory:', newCategory)
-  }
+  const loadTripsByCategory = (newCategory: string) => {}
 
-  const selectCategory = (product: Product) => {
-    console.info('choose category:', product)
-  }
+  const selectCategory = (product: Product) => {}
 
   return (
     <ScrollView style={[styles.home, { backgroundColor: colors.BACKGROUND }]}>
