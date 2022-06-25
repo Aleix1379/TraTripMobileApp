@@ -25,7 +25,7 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
   const [tours] = useState<Array<Tour>>([
     {
       id: 1,
-      city: 'Singapore',
+      city: 'Singapore City',
       image: require('../../assets/images/signapore.png'),
       details: {
         price: '$2000',
@@ -86,6 +86,35 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
   return (
     <View style={[styles.tourDetails, { backgroundColor: colors.BACKGROUND }]}>
       <Image style={styles.image} source={selectedTour.image} />
+      <View
+        style={{
+          marginLeft: 18,
+          flex: 1,
+          justifyContent: 'flex-end',
+          paddingBottom: 25,
+          alignItems: 'flex-start'
+        }}>
+        <Text
+          style={{
+            fontSize: 16,
+            color: colors.GREY,
+            backgroundColor: 'rgba(34,34,34,0.85)',
+            paddingHorizontal: 8,
+            paddingVertical: 3
+          }}>
+          Trip To
+        </Text>
+        <Text
+          style={{
+            fontSize: 35,
+            fontWeight: 'bold',
+            backgroundColor: 'rgba(34,34,34,0.85)',
+            paddingHorizontal: 8,
+            paddingVertical: 3
+          }}>
+          {selectedTour.city}
+        </Text>
+      </View>
       <BottomSheet>
         <View style={styles.header}>
           <Text style={[styles.title, { color: colors.TEXT }]}>
@@ -158,22 +187,13 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
           ))}
         </ScrollView>
         <View
-          style={{
-            width: 44,
-            height: 44,
-            borderRadius: 22,
-            backgroundColor: colors.BACKGROUND,
-            position: 'absolute',
-            bottom: 10,
-            right: 10,
-            alignItems: 'center',
-            justifyContent: 'center',
-            shadowColor: colors.BACKGROUND,
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-            elevation: 1
-          }}>
+          style={[
+            styles.plusButton,
+            {
+              backgroundColor: colors.BACKGROUND,
+              shadowColor: colors.BACKGROUND
+            }
+          ]}>
           <Text style={{ color: colors.ACCENT, fontSize: 30 }}>+</Text>
         </View>
       </BottomSheet>
@@ -257,6 +277,20 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5
+  },
+  plusButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 1
   }
 })
 
