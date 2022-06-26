@@ -1,30 +1,19 @@
 import React, { useState } from 'react'
-import {
-  Dimensions,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native'
+import { ImageSourcePropType, ScrollView, StyleSheet, Text } from 'react-native'
 import useTheme from '../styles/useTheme'
 import SearchBar from '../components/SearchBar'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
 import SelectItems from '../components/SelectItems'
 import ProductSelector from '../components/ProductSelector'
 import { Product } from '../types/product'
-
-type homeScreenProp = StackNavigationProp<any>
+import HorizontalProductList from '../components/HorizontalProductList'
+import { Trip } from '../types/trip'
+import jsonTrips from '../../assets/data/trips.json'
 
 interface HomeState {
   popularCategories: Array<Product>
 }
 
 const Home = () => {
-  const navigation = useNavigation<homeScreenProp>()
   const theme = useTheme()
   const { colors } = theme
   const [categories] = useState<Array<string>>([
@@ -56,33 +45,19 @@ const Home = () => {
       name: 'Events'
     }
   ])
-  const [trips] = useState([
-    {
-      id: 1,
-      image: require('../../assets/images/tajmahal.png'),
-      city: 'Tajmahal',
-      country: 'India',
-      price: '$2000'
-    },
-    {
-      id: 2,
-      image: require('../../assets/images/paris.png'),
-      city: 'Paris',
-      country: 'France',
-      price: '$1200'
-    }
-  ])
+  const [images] = useState<{ [key: string]: ImageSourcePropType }>({
+    'tajmahal.png': require('../../assets/images/tajmahal.png'),
+    'paris.png': require('../../assets/images/paris.png')
+  })
+  const [trips] = useState<Array<Trip>>(jsonTrips)
 
-  const getTripImageSize = () => {
-    return {
-      with: Dimensions.get('window').width * 0.65,
-      height: Dimensions.get('window').width * 0.65 * 1.22
-    }
+  const loadTripsByCategory = (newCategory: string) => {
+    console.info('newCategory:', newCategory)
   }
 
-  const loadTripsByCategory = (newCategory: string) => {}
-
-  const selectCategory = (product: Product) => {}
+  const selectCategory = (product: Product) => {
+    console.info('product:', product)
+  }
 
   return (
     <ScrollView style={[styles.home, { backgroundColor: colors.BACKGROUND }]}>
@@ -92,7 +67,7 @@ const Home = () => {
         Explore the best places in world!
       </Text>
 
-      <SearchBar style={styles.searchBar} />
+      <SearchBar style={styles.searchBar} title={'Search your trip'} />
 
       <SelectItems
         items={categories}
@@ -100,79 +75,15 @@ const Home = () => {
         style={{ marginTop: 40 }}
       />
 
-      <ScrollView horizontal={true} style={styles.trips}>
-        {trips.map((trip, index) => (
-          <View
-            key={trip.id}
-            onTouchEnd={() =>
-              navigation.navigate('TripDetails', { id: trip.id })
-            }>
-            <View
-              style={[
-                styles.tripOverlay,
-                {
-                  width: getTripImageSize().with,
-                  height: getTripImageSize().height
-                }
-              ]}
-            />
-            <Image
-              source={trip.image}
-              style={[
-                styles.tripImage,
-                {
-                  marginRight: index < trips.length - 1 ? 25 : 0,
-                  width: getTripImageSize().with,
-                  height: getTripImageSize().height
-                }
-              ]}
-            />
-            <View
-              style={[styles.tripDetails, { width: getTripImageSize().with }]}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-around',
-                  alignItems: 'center'
-                }}>
-                <View>
-                  <View style={{ flexDirection: 'row' }}>
-                    <Text
-                      style={[
-                        styles.tripText,
-                        { color: colors.TEXT, marginRight: 8 }
-                      ]}>
-                      {trip.city},
-                    </Text>
-                    <Text style={[styles.tripText, { color: colors.TEXT }]}>
-                      {trip.country}
-                    </Text>
-                  </View>
-                  <Text style={[styles.tripText, { marginTop: 2 }]}>
-                    Starting at {trip.price}
-                  </Text>
-                </View>
-
-                <View
-                  style={{
-                    backgroundColor: '#ddd',
-                    width: 28,
-                    height: 28,
-                    borderRadius: 14,
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                  <FontAwesomeIcon
-                    icon={faHeart}
-                    size={16}
-                    color={colors.ACCENT}
-                  />
-                </View>
-              </View>
-            </View>
-          </View>
-        ))}
-      </ScrollView>
+      <HorizontalProductList
+        items={trips.map(trip => ({
+          id: trip.id,
+          image: images[trip.image],
+          title: trip.city + ', ' + trip.country,
+          description: 'Starting at ' + trip.price
+        }))}
+        style={styles.trips}
+      />
 
       <Text style={[styles.popularCategoryTitle, { color: colors.GREY }]}>
         Popular Categories
@@ -196,32 +107,8 @@ const styles = StyleSheet.create({
   searchBar: {
     marginTop: 40
   },
-
   trips: {
-    marginTop: 20,
-    flexDirection: 'row'
-  },
-  tripImage: {
-    flex: 1,
-    borderRadius: 30,
-    resizeMode: 'cover'
-  },
-  tripOverlay: {
-    backgroundColor: 'rgba(33, 33, 33, 0.6)',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    borderRadius: 30,
-    zIndex: 100
-  },
-  tripDetails: {
-    position: 'absolute',
-    left: 0,
-    bottom: 8,
-    zIndex: 1000
-  },
-  tripText: {
-    fontSize: 16
+    marginTop: 20
   },
   popularCategoryTitle: {
     marginTop: 30,

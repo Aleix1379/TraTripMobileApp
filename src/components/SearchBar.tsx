@@ -8,9 +8,10 @@ const ICON_SIZE = 30
 
 interface SearchBarProps {
   style?: StyleProp<TextStyle> | undefined
+  title: string
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ style }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ style, title }) => {
   const theme = useTheme()
   const { colors } = theme
 
@@ -18,7 +19,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ style }) => {
     <View style={[style, styles.searchBar, { backgroundColor: colors.SHADOW }]}>
       <TextInput
         style={[styles.input, { color: colors.GREY }]}
-        placeholder={'Search your trip'}
+        placeholder={title}
       />
       <View style={[styles.icon, { backgroundColor: colors.ACCENT }]}>
         <FontAwesomeIcon

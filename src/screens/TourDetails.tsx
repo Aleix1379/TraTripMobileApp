@@ -5,14 +5,16 @@ import {
   StyleSheet,
   Image,
   Dimensions,
-  ScrollView
+  ScrollView,
+  ImageSourcePropType
 } from 'react-native'
 import useTheme from '../styles/useTheme'
 import BottomSheet from '../components/BottomSheet'
-import { Tour } from '../types/Tour'
+import { Tour } from '../types/tour'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
 import Score from '../components/Score'
+import jsonTours from '../../assets/data/tours.json'
 
 interface TourDetailsProps {
   route: any
@@ -23,36 +25,7 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
   const theme = useTheme()
   const { colors } = theme
 
-  const [tours] = useState<Array<Tour>>([
-    {
-      id: 1,
-      city: 'Singapore City',
-      image: require('../../assets/images/signapore.png'),
-      score: 4,
-      details: {
-        price: '$2000',
-        duration: '7 days',
-        activities: [
-          {
-            id: 1,
-            title: 'Marina Bay Sands',
-            location: 'Resort and Hotel',
-            duration: '2 days',
-            date: '2021-03-15',
-            image: require('../../assets/images/marina-bay-sands.png')
-          },
-          {
-            id: 2,
-            title: 'Gardens by the Bay',
-            location: 'Supertree Grove',
-            duration: '1 day',
-            date: '2021-03-17',
-            image: require('../../assets/images/gardens-by-the-bay.png')
-          }
-        ]
-      }
-    }
-  ])
+  const [tours] = useState<Array<Tour>>(jsonTours)
 
   const [selectedTour, setSelectedTour] = useState(tours[0])
 
@@ -84,9 +57,15 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
     } ${newDate.getFullYear()}`
   }
 
+  const [images] = useState<{ [key: string]: ImageSourcePropType }>({
+    'signapore.png': require('../../assets/images/signapore.png'),
+    'marina-bay-sands.png': require('../../assets/images/marina-bay-sands.png'),
+    'gardens-by-the-bay.png': require('../../assets/images/gardens-by-the-bay.png')
+  })
+
   return (
     <View style={[styles.tourDetails, { backgroundColor: colors.BACKGROUND }]}>
-      <Image style={styles.image} source={selectedTour.image} />
+      <Image style={styles.image} source={images[selectedTour.image]} />
       <View
         style={{
           marginLeft: 18,
@@ -168,7 +147,10 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
                 <View
                   style={[styles.separator, { borderLeftColor: colors.GREY }]}
                 />
-                <Image source={activity.image} style={styles.activityImage} />
+                <Image
+                  source={images[activity.image]}
+                  style={styles.activityImage}
+                />
                 <View style={styles.activityDetail}>
                   <Text style={[styles.activityTitle, { color: colors.TEXT }]}>
                     {activity.title}

@@ -3,13 +3,17 @@ import { Image, StyleSheet, View } from 'react-native'
 import useTheme from '../../styles/useTheme'
 import SearchBar from '../SearchBar'
 
-const HeaderExplore: React.FC = () => {
+interface SavedProps {
+  title: string
+}
+
+const HeaderExplore: React.FC<SavedProps> = ({ title }) => {
   const theme = useTheme()
   const { colors } = theme
 
   return (
     <View style={[styles.header, { backgroundColor: colors.BACKGROUND }]}>
-      <SearchBar style={styles.searchBar} />
+      <SearchBar style={styles.searchBar} title={title} />
       <Image
         source={require('../../../assets/images/avatar.png')}
         style={styles.avatar}

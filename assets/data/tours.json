@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "city": "Singapore City",
+    "image": "signapore.png",
+    "score": 4,
+    "details": {
+      "price": "$2000",
+      "duration": "7 days",
+      "activities": [
+        {
+          "id": 1,
+          "title": "Marina Bay Sands",
+          "location": "Resort and Hotel",
+          "duration": "2 days",
+          "date": "2021-03-15",
+          "image": "marina-bay-sands.png"
+        },
+        {
+          "id": 2,
+          "title": "Gardens by the Bay",
+          "location": "Supertree Grove",
+          "duration": "1 day",
+          "date": "2021-03-17",
+          "image": "gardens-by-the-bay.png"
+        }
+      ]
+    }
+  }
+]

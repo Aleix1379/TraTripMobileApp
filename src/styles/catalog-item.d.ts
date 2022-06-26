@@ -1,7 +1,8 @@
 import { ImageSourcePropType } from 'react-native'
 
-export interface Product {
+interface CatalogItem {
   id: number
-  name: string
+  title: string
   image: ImageSourcePropType
+  description: string
 }

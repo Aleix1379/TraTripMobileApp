@@ -55,17 +55,23 @@ const App = () => {
             <Stack.Screen
               name="Explore"
               component={Explore}
-              options={{ header: () => <HeaderExplore /> }}
+              options={{
+                header: () => <HeaderExplore title={'Search your trip'} />
+              }}
             />
             <Stack.Screen
               name="News"
               component={Notifications}
-              options={{ header: () => <HeaderExplore /> }}
+              options={{ header: () => <HomeHeader /> }}
             />
             <Stack.Screen
               name="Saved"
               component={Saved}
-              options={{ header: () => <HeaderExplore /> }}
+              options={{
+                header: () => (
+                  <HeaderExplore title={'Search your trip or tour'} />
+                )
+              }}
             />
             <Stack.Screen
               name="TripDetails"

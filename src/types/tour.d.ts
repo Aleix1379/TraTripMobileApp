@@ -6,7 +6,7 @@ interface Activity {
   location: string
   duration: string
   date: string
-  image: ImageSourcePropType
+  image: string
 }
 
 interface Details {
@@ -18,7 +18,7 @@ interface Details {
 export interface Tour {
   id: number
   city: string
-  image: number
+  image: string
   score: number
   details: Details
 }

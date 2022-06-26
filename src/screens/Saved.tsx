@@ -1,16 +1,95 @@
-import { Text, View } from 'react-native'
-import React from 'react'
+import {
+  Dimensions,
+  ImageSourcePropType,
+  ScrollView,
+  StyleSheet,
+  Text
+} from 'react-native'
+import React, { useState } from 'react'
 import useTheme from '../styles/useTheme'
+import { Trip } from '../types/trip'
+import jsonTrips from '../../assets/data/trips.json'
+import HorizontalProductList from '../components/HorizontalProductList'
+import jsonTours from '../../assets/data/tours.json'
+import { Tour } from '../types/tour'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+
+type homeScreenProp = StackNavigationProp<any>
 
 const Saved = () => {
   const theme = useTheme()
   const { colors } = theme
+  const [trips] = useState<Array<Trip>>(jsonTrips)
+  const [tours] = useState<Array<Tour>>(jsonTours)
+  const navigation = useNavigation<homeScreenProp>()
+  const [images] = useState<{ [key: string]: ImageSourcePropType }>({
+    'tajmahal.png': require('../../assets/images/tajmahal.png'),
+    'paris.png': require('../../assets/images/paris.png'),
+    'signapore.png': require('../../assets/images/signapore.png')
+  })
+
+  const getItemSize = () => {
+    return {
+      width: Dimensions.get('window').width / 2.15,
+      height: (Dimensions.get('window').width / 2.15) * 1.22
+    }
+  }
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.BACKGROUND }}>
-      <Text style={{ color: '#ff0000' }}>second screen</Text>
-    </View>
+    <ScrollView style={[styles.saved, { backgroundColor: colors.BACKGROUND }]}>
+      <Text style={[styles.title, { color: colors.GREY }]}>Your trips</Text>
+      <HorizontalProductList
+        onPress={(id: number) => navigation.navigate('TripDetails', { id })}
+        items={trips.map(trip => ({
+          id: trip.id,
+          image: images[trip.image],
+          title: trip.city + ', ' + trip.country,
+          description: 'Starting at ' + trip.price
+        }))}
+        style={[styles.trips, { maxHeight: getItemSize().height }]}
+        imageSize={{
+          width: getItemSize().width,
+          height: getItemSize().height
+        }}
+      />
+
+      <Text style={[styles.title, { color: colors.GREY }]}>Your tours</Text>
+      <HorizontalProductList
+        onPress={(id: number) => navigation.navigate('TourDetails', { id })}
+        items={tours.map(tour => ({
+          id: tour.id,
+          image: images[tour.image],
+          title: tour.city,
+          description: 'Starting at ' + tour.details.price
+        }))}
+        style={[
+          styles.trips,
+          {
+            maxHeight: getItemSize().height
+          }
+        ]}
+        imageSize={{
+          width: getItemSize().width,
+          height: getItemSize().height
+        }}
+      />
+    </ScrollView>
   )
 }
+
+const styles = StyleSheet.create({
+  saved: {
+    flex: 1,
+    paddingHorizontal: 15
+  },
+  title: {
+    fontSize: 30,
+    marginTop: 20
+  },
+  trips: {
+    marginTop: 10
+  }
+})
 
 export default Saved
