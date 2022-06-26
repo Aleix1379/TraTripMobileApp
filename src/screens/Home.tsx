@@ -8,12 +8,17 @@ import { Product } from '../types/product'
 import HorizontalProductList from '../components/HorizontalProductList'
 import { Trip } from '../types/trip'
 import jsonTrips from '../../assets/data/trips.json'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+
+type homeScreenProp = StackNavigationProp<any>
 
 interface HomeState {
   popularCategories: Array<Product>
 }
 
 const Home = () => {
+  const navigation = useNavigation<homeScreenProp>()
   const theme = useTheme()
   const { colors } = theme
   const [categories] = useState<Array<string>>([
@@ -76,6 +81,7 @@ const Home = () => {
       />
 
       <HorizontalProductList
+        onPress={(id: number) => navigation.navigate('TripDetails', { id })}
         items={trips.map(trip => ({
           id: trip.id,
           image: images[trip.image],
