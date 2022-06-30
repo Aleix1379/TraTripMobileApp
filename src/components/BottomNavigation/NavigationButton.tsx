@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   button: {},
   label: {
     fontWeight: 'bold',
-    marginLeft: 5,
+    marginLeft: 8,
     fontSize: 12
   },
   background: {
