@@ -20,8 +20,6 @@ interface NavButtonProps {
   isActive: boolean
 }
 
-const ANIMATION_DURATION = 1000
-
 const NavButton: React.FC<NavButtonProps> = ({ label, to, icon, isActive }) => {
   const navigation = useNavigation<homeScreenProp>()
   const theme = useTheme()
