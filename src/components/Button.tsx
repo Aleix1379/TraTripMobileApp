@@ -1,13 +1,13 @@
 import React from 'react'
 import { Text, StyleProp, TextStyle, View } from 'react-native'
 import useTheme from '../styles/useTheme'
-import { LinearGradient } from 'react-native-svg/lib/typescript'
 
 interface ButtonProps {
   label: string
   type: 'outline' | 'contained'
   style?: StyleProp<TextStyle> | undefined
   color?: string
+  testID?: string | undefined
 }
 
 const Button: React.FC<ButtonProps> = ({ label, type, style, color }) => {
