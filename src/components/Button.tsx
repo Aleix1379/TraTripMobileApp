@@ -7,10 +7,17 @@ interface ButtonProps {
   type: 'outline' | 'contained'
   style?: StyleProp<TextStyle> | undefined
   color?: string
+  onPress?: () => void
   testID?: string | undefined
 }
 
-const Button: React.FC<ButtonProps> = ({ label, type, style, color }) => {
+const Button: React.FC<ButtonProps> = ({
+  label,
+  type,
+  style,
+  color,
+  onPress
+}) => {
   const theme = useTheme()
   const { colors } = theme
   if (!color) {
@@ -30,7 +37,8 @@ const Button: React.FC<ButtonProps> = ({ label, type, style, color }) => {
           justifyContent: 'center',
           alignItems: 'center'
         }
-      ]}>
+      ]}
+      onTouchEnd={onPress}>
       <Text style={{ fontWeight: 'bold', color: color, fontSize: 16 }}>
         {label}
       </Text>
