@@ -7,7 +7,6 @@ jest.mock('@fortawesome/react-native-fontawesome', () => ({
   FontAwesomeIcon: () => ''
 }))
 
-// tests render correctly mocking FontAwesomeIcon
 it('renders correctly', () => {
   const tree = renderer.create(<Score score={3} />)
   expect(tree).toMatchSnapshot()
