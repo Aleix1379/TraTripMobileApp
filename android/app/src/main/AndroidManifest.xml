@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.tratripmobileapp">
+  package="com.aleixmp.tratripmobileapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

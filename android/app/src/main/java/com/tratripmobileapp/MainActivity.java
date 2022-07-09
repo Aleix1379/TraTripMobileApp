@@ -1,4 +1,4 @@
-package com.tratripmobileapp;
+package com.aleixmp.tratripmobileapp;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

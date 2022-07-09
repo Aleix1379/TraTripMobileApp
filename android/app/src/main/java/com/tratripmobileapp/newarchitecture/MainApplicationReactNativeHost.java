@@ -1,4 +1,4 @@
-package com.tratripmobileapp.newarchitecture;
+package com.aleixmp.tratripmobileapp.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.tratripmobileapp.BuildConfig;
-import com.tratripmobileapp.newarchitecture.components.MainComponentsRegistry;
-import com.tratripmobileapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.aleixmp.tratripmobileapp.BuildConfig;
+import com.aleixmp.tratripmobileapp.newarchitecture.components.MainComponentsRegistry;
+import com.aleixmp.tratripmobileapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
