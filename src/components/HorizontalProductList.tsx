@@ -22,6 +22,7 @@ interface HorizontalProductListProps {
     height: number
   }
   onPress?: (id: number) => void
+  testID?: string | undefined
 }
 
 const HorizontalProductList: React.FC<HorizontalProductListProps> = ({
@@ -52,7 +53,10 @@ const HorizontalProductList: React.FC<HorizontalProductListProps> = ({
     index: number
   }) => {
     return (
-      <View key={item.id} onTouchEnd={() => onPress && onPress(item.id)}>
+      <View
+        testID={`horizontal-product-row-${item.id}`}
+        key={item.id}
+        onTouchEnd={() => onPress && onPress(item.id)}>
         <View
           style={[
             {
