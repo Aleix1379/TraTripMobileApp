@@ -10,6 +10,7 @@ interface CategorySelectorProps {
   style?: StyleProp<ViewStyle>
   items: Array<Product>
   onProductSelected: (item: Product) => void
+  testID?: string | undefined
 }
 
 const ProductSelector: React.FC<CategorySelectorProps> = ({
@@ -29,6 +30,7 @@ const ProductSelector: React.FC<CategorySelectorProps> = ({
       ]}>
       {items.map((product, index) => (
         <View
+          testID={`list-id-${product.id}`}
           style={styles.popularCategory}
           key={index}
           onTouchEnd={() => onProductSelected(product)}>
