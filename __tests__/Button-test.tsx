@@ -78,3 +78,22 @@ it('onPress is not passed', () => {
   fireEvent.press(button)
   expect(onPress).not.toHaveBeenCalled()
 })
+
+it('renders with custom styles', () => {
+  const text = 'Book Now'
+  const testID = 'button-book-now'
+  const color = '#FF455B'
+  const style = { backgroundColor: 'green' }
+
+  const wrapper = renderer.create(
+    <Button
+      testID={testID}
+      label={text}
+      type={'contained'}
+      color={color}
+      style={style}
+    />
+  )
+  const button = wrapper.root.findByProps({ testID: testID })
+  expect(button.props.style.backgroundColor).toBe('green')
+})
