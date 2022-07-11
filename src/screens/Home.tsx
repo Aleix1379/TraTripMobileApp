@@ -72,7 +72,11 @@ const Home = () => {
         Explore the best places in world!
       </Text>
 
-      <SearchBar style={styles.searchBar} title={'Search your trip'} />
+      <SearchBar
+        style={styles.searchBar}
+        title={'Search your trip'}
+        onTextChange={text => console.log(text)}
+      />
 
       <SelectItems
         items={categories}
