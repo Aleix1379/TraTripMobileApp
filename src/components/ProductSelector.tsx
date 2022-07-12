@@ -1,5 +1,12 @@
 import React from 'react'
-import { Image, StyleProp, StyleSheet, View, ViewStyle } from 'react-native'
+import {
+  Image,
+  StyleProp,
+  StyleSheet,
+  TouchableHighlight,
+  View,
+  ViewStyle
+} from 'react-native'
 import { Text } from 'react-native'
 import useTheme from '../styles/useTheme'
 import { Product } from '../types/product'
@@ -29,14 +36,15 @@ const ProductSelector: React.FC<CategorySelectorProps> = ({
         style
       ]}>
       {items.map((product, index) => (
-        <View
+        <TouchableHighlight
           testID={`list-id-${product.id}`}
-          style={styles.popularCategory}
           key={index}
-          onTouchEnd={() => onProductSelected(product)}>
-          <Image source={product.image} style={styles.popularImage} />
-          <Text>{product.name}</Text>
-        </View>
+          onPress={() => onProductSelected(product)}>
+          <View style={styles.popularCategory}>
+            <Image source={product.image} style={styles.popularImage} />
+            <Text>{product.name}</Text>
+          </View>
+        </TouchableHighlight>
       ))}
     </View>
   )

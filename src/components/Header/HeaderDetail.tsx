@@ -7,14 +7,20 @@ import { useNavigation } from '@react-navigation/native'
 
 const ICON_SIZE = 30
 
-const HeaderDetail: React.FC = () => {
+interface HeaderDetailProps {
+  testID?: string
+}
+
+const HeaderDetail: React.FC<HeaderDetailProps> = ({ testID }) => {
   const navigation = useNavigation()
   const theme = useTheme()
   const { colors } = theme
 
   return (
     <View style={[styles.header]}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      <TouchableOpacity
+        testID={`${testID}-button`}
+        onPress={() => navigation.goBack()}>
         <FontAwesomeIcon icon={faArrowLeftLong} color={colors.TEXT} size={20} />
       </TouchableOpacity>
       <View

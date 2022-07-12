@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, Animated } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  Animated,
+  TouchableHighlight
+} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -14,13 +20,20 @@ import {
 type homeScreenProp = StackNavigationProp<any>
 
 interface NavButtonProps {
+  testID?: string
   label: string
   to: string
   icon: 'home' | 'location' | 'notification' | 'heart'
   isActive: boolean
 }
 
-const NavButton: React.FC<NavButtonProps> = ({ label, to, icon, isActive }) => {
+const NavButton: React.FC<NavButtonProps> = ({
+  testID,
+  label,
+  to,
+  icon,
+  isActive
+}) => {
   const navigation = useNavigation<homeScreenProp>()
   const theme = useTheme()
   const { colors } = theme
@@ -61,24 +74,28 @@ const NavButton: React.FC<NavButtonProps> = ({ label, to, icon, isActive }) => {
 
   return (
     <View style={[styles.bar, { backgroundColor: colors.BACKGROUND }]}>
-      <View onTouchEnd={() => navigation.navigate(to)} style={[styles.item]}>
-        <FontAwesomeIcon
-          icon={icons[icon]}
-          size={22}
-          style={{ color: colors.TEXT, zIndex: 1 }}
-        />
+      <TouchableHighlight
+        testID={`${testID}-button`}
+        onPress={() => navigation.navigate(to)}>
+        <View style={[styles.item]}>
+          <FontAwesomeIcon
+            icon={icons[icon]}
+            size={22}
+            style={{ color: colors.TEXT, zIndex: 1 }}
+          />
 
-        <Animated.View
-          style={[
-            styles.background,
-            {
-              backgroundColor: isActive ? colors.ACCENT : 'transparent'
-            },
-            animatedStyles.upper
-          ]}
-        />
-        <Text style={[styles.label]}>{label}</Text>
-      </View>
+          <Animated.View
+            style={[
+              styles.background,
+              {
+                backgroundColor: isActive ? colors.ACCENT : 'transparent'
+              },
+              animatedStyles.upper
+            ]}
+          />
+          <Text style={[styles.label]}>{label}</Text>
+        </View>
+      </TouchableHighlight>
     </View>
   )
 }

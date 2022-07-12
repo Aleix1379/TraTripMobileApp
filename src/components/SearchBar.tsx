@@ -1,13 +1,5 @@
 import React from 'react'
-import {
-  NativeSyntheticEvent,
-  StyleProp,
-  StyleSheet,
-  TextInput,
-  TextInputChangeEventData,
-  TextStyle,
-  View
-} from 'react-native'
+import { StyleProp, StyleSheet, TextInput, TextStyle, View } from 'react-native'
 import useTheme from '../styles/useTheme'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
@@ -30,19 +22,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const theme = useTheme()
   const { colors } = theme
 
-  const onChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
-    if (onTextChange) {
-      onTextChange(event.nativeEvent.text)
-    }
-  }
-
   return (
     <View style={[style, styles.searchBar, { backgroundColor: colors.SHADOW }]}>
       <TextInput
         testID={`${testID}-input`}
         style={[styles.input, { color: colors.GREY }]}
         placeholder={title}
-        onChange={onChange}
+        onChangeText={onTextChange}
       />
       <View style={[styles.icon, { backgroundColor: colors.ACCENT }]}>
         <FontAwesomeIcon

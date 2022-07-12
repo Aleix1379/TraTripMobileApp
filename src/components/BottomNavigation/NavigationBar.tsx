@@ -28,24 +28,28 @@ const NavigationBar: React.FC<BottomNavigationProps> = () => {
     !isInDetailPage && (
       <View style={{ flexDirection: 'row' }}>
         <NavigationButton
+          testID={'nav-home'}
           label={'Home'}
           to={'Home'}
           icon={'home'}
           isActive={currentScreen === 'Home'}
         />
         <NavigationButton
+          testID={'nav-location'}
           label={'Explore'}
           to={'Explore'}
           icon={'location'}
           isActive={currentScreen === 'Explore'}
         />
         <NavigationButton
+          testID={'nav-notification'}
           label={'News'}
           to={'News'}
           icon={'notification'}
           isActive={currentScreen === 'News'}
         />
         <NavigationButton
+          testID={'nav-heart'}
           label={'Saved'}
           to={'Saved'}
           icon={'heart'}

@@ -3,6 +3,7 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import HorizontalProductList from '../src/components/HorizontalProductList'
 import { CatalogItem } from '../src/styles/catalog-item'
+import { fireEvent, render } from '@testing-library/react-native'
 
 jest.mock('@fortawesome/react-native-fontawesome', () => ({
   FontAwesomeIcon: () => ''
@@ -90,14 +91,12 @@ it('renders correctly with onPress', () => {
     }
   ]
   const onPress = jest.fn()
-  const tree = renderer.create(
+  const { getByTestId } = render(
     <HorizontalProductList testID={testID} items={items} onPress={onPress} />
   )
-  tree.root
-    .findByProps({ testID })
-    .findByProps({ testID: 'horizontal-product-row-' + items[0].id })
-    .props.onTouchEnd()
 
+  const item = getByTestId(`${testID}-${items[0].id}`)
+  fireEvent.press(item)
   expect(onPress).toHaveBeenCalledWith(items[0].id)
 })
 
@@ -111,13 +110,12 @@ it('renders correctly with custom style props', () => {
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     }
   ]
-  const tree = renderer.create(
-    <HorizontalProductList
-      testID={testID}
-      items={items}
-      style={{ backgroundColor: 'red' }}
-    />
+  const onPress = jest.fn()
+  const { getByTestId } = render(
+    <HorizontalProductList testID={testID} items={items} />
   )
-  const element = tree.root.findByProps({ testID: testID })
-  expect(element.props.style.backgroundColor).toBe('red')
+
+  const item = getByTestId(`${testID}-${items[0].id}`)
+  fireEvent.press(item)
+  expect(onPress).not.toHaveBeenCalledWith()
 })

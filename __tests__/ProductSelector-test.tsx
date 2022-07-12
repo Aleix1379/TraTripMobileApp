@@ -3,6 +3,7 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import { Product } from '../src/types/product'
 import ProductSelector from '../src/components/ProductSelector'
+import { fireEvent, render } from '@testing-library/react-native'
 
 it('renders correctly', () => {
   const testID = 'list-id'
@@ -39,14 +40,14 @@ it('renders correctly with onProductSelected', () => {
     }
   ]
   const onProductSelected = jest.fn()
-  const tree = renderer.create(
+  const { getByTestId } = render(
     <ProductSelector
       testID={testID}
       items={items}
       onProductSelected={onProductSelected}
     />
   )
-  tree.root.findByProps({ testID: `list-id-${items[0].id}` }).props.onTouchEnd()
+  fireEvent.press(getByTestId(`list-id-${items[0].id}`))
   expect(onProductSelected).toHaveBeenCalledWith(items[0])
 })
 

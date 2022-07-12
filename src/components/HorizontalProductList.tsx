@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   TextStyle,
+  TouchableHighlight,
   View
 } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -29,7 +30,8 @@ const HorizontalProductList: React.FC<HorizontalProductListProps> = ({
   items,
   style,
   imageSize,
-  onPress
+  onPress,
+  testID
 }) => {
   const theme = useTheme()
   const { colors } = theme
@@ -53,65 +55,67 @@ const HorizontalProductList: React.FC<HorizontalProductListProps> = ({
     index: number
   }) => {
     return (
-      <View
-        testID={`horizontal-product-row-${item.id}`}
+      <TouchableHighlight
+        testID={`${testID}-${item.id}`}
         key={item.id}
-        onTouchEnd={() => onPress && onPress(item.id)}>
-        <View
-          style={[
-            {
-              width: getTripImageSize().width,
-              height: getTripImageSize().height,
-              marginRight: index < items.length - 1 ? 25 : 0
-            }
-          ]}>
-          <Image source={item.image} style={styles.tripImage} />
-          <View style={styles.tripImageOverlay} />
+        onPress={() => onPress && onPress(item.id)}>
+        <View>
           <View
-            style={[styles.tripDetails, { width: getTripImageSize().width }]}>
+            style={[
+              {
+                width: getTripImageSize().width,
+                height: getTripImageSize().height,
+                marginRight: index < items.length - 1 ? 25 : 0
+              }
+            ]}>
+            <Image source={item.image} style={styles.tripImage} />
+            <View style={styles.tripImageOverlay} />
             <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                alignItems: 'center'
-              }}>
-              <View>
-                <View
-                  style={[
-                    styles.description,
-                    {
-                      borderTopLeftRadius: 3,
-                      borderTopRightRadius: 3
-                    }
-                  ]}>
-                  <Text style={[styles.tripText, { color: colors.TEXT }]}>
-                    {item.title}
+              style={[styles.tripDetails, { width: getTripImageSize().width }]}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                  alignItems: 'center'
+                }}>
+                <View>
+                  <View
+                    style={[
+                      styles.description,
+                      {
+                        borderTopLeftRadius: 3,
+                        borderTopRightRadius: 3
+                      }
+                    ]}>
+                    <Text style={[styles.tripText, { color: colors.TEXT }]}>
+                      {item.title}
+                    </Text>
+                  </View>
+                  <Text
+                    style={[
+                      styles.tripText,
+                      styles.description,
+                      {
+                        borderBottomLeftRadius: 3,
+                        borderBottomRightRadius: 3
+                      }
+                    ]}>
+                    {item.description}
                   </Text>
                 </View>
-                <Text
-                  style={[
-                    styles.tripText,
-                    styles.description,
-                    {
-                      borderBottomLeftRadius: 3,
-                      borderBottomRightRadius: 3
-                    }
-                  ]}>
-                  {item.description}
-                </Text>
-              </View>
 
-              <View style={styles.heart}>
-                <FontAwesomeIcon
-                  icon={faHeart}
-                  size={16}
-                  color={colors.ACCENT}
-                />
+                <View style={styles.heart}>
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    size={16}
+                    color={colors.ACCENT}
+                  />
+                </View>
               </View>
             </View>
           </View>
         </View>
-      </View>
+      </TouchableHighlight>
     )
   }
 
