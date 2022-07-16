@@ -8,7 +8,6 @@ jest.mock('@fortawesome/react-native-fontawesome', () => ({
   FontAwesomeIcon: () => ''
 }))
 
-// mock userNavigation
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({
     navigate: jest.fn()

@@ -8,19 +8,23 @@ import { Product } from '../types/product'
 import HorizontalProductList from '../components/HorizontalProductList'
 import { Trip } from '../types/trip'
 import jsonTrips from '../../assets/data/trips.json'
-import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 type homeScreenProp = StackNavigationProp<any>
+
+interface HomeProps {
+  navigation: any
+  testID?: string | undefined
+}
 
 interface HomeState {
   popularCategories: Array<Product>
 }
 
-const Home = () => {
-  const navigation = useNavigation<homeScreenProp>()
+const Home: React.FC<HomeProps> = ({ navigation, testID }) => {
   const theme = useTheme()
   const { colors } = theme
+  const [searchText, setSearchText] = useState('')
   const [categories] = useState<Array<string>>([
     'All',
     'America',
@@ -28,6 +32,9 @@ const Home = () => {
     'Asia',
     'Oceania'
   ])
+  const [tripCategorySelected, setTripCategorySelected] = useState(
+    categories[0]
+  )
   const [popularCategories] = useState<HomeState['popularCategories']>([
     {
       id: 1,
@@ -50,18 +57,21 @@ const Home = () => {
       name: 'Events'
     }
   ])
+  const [popularCategorySelected, setPopularCategorySelected] = useState(
+    popularCategories[0]
+  )
   const [images] = useState<{ [key: string]: ImageSourcePropType }>({
     'tajmahal.png': require('../../assets/images/tajmahal.png'),
     'paris.png': require('../../assets/images/paris.png')
   })
   const [trips] = useState<Array<Trip>>(jsonTrips)
 
-  const loadTripsByCategory = (newCategory: string) => {
-    console.info('newCategory:', newCategory)
+  const loadTripsByCategory = (newTripCategory: string) => {
+    setTripCategorySelected(newTripCategory)
   }
 
-  const selectCategory = (product: Product) => {
-    console.info('product:', product)
+  const selectPopularCategory = (product: Product) => {
+    setPopularCategorySelected(product)
   }
 
   return (
@@ -75,16 +85,20 @@ const Home = () => {
       <SearchBar
         style={styles.searchBar}
         title={'Search your trip'}
-        onTextChange={text => console.log(text)}
+        value={searchText}
+        onTextChange={text => setSearchText(text)}
       />
 
       <SelectItems
+        testID={'select-category'}
         items={categories}
+        value={tripCategorySelected}
         onItemChange={loadTripsByCategory}
         style={{ marginTop: 40 }}
       />
 
       <HorizontalProductList
+        testID={testID}
         onPress={(id: number) => navigation.navigate('TripDetails', { id })}
         items={trips.map(trip => ({
           id: trip.id,
@@ -101,7 +115,8 @@ const Home = () => {
       <ProductSelector
         style={styles.popularCategories}
         items={popularCategories}
-        onProductSelected={selectCategory}
+        value={popularCategorySelected}
+        onProductSelected={selectPopularCategory}
       />
     </ScrollView>
   )

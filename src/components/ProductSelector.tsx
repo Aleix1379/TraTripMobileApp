@@ -3,7 +3,7 @@ import {
   Image,
   StyleProp,
   StyleSheet,
-  TouchableHighlight,
+  TouchableOpacity,
   View,
   ViewStyle
 } from 'react-native'
@@ -16,13 +16,14 @@ const POPULAR_IMAGE_SIZE = 60
 interface CategorySelectorProps {
   style?: StyleProp<ViewStyle>
   items: Array<Product>
+  value: Product
   onProductSelected: (item: Product) => void
-  testID?: string | undefined
 }
 
 const ProductSelector: React.FC<CategorySelectorProps> = ({
   style,
   items,
+  value,
   onProductSelected
 }) => {
   const theme = useTheme()
@@ -30,21 +31,27 @@ const ProductSelector: React.FC<CategorySelectorProps> = ({
 
   return (
     <View
+      testID={'select-products'}
       style={[
         styles.categorySelector,
         { backgroundColor: colors.BACKGROUND },
         style
       ]}>
       {items.map((product, index) => (
-        <TouchableHighlight
-          testID={`list-id-${product.id}`}
+        <TouchableOpacity
+          testID={`select-products-${product.id}`}
           key={index}
           onPress={() => onProductSelected(product)}>
           <View style={styles.popularCategory}>
             <Image source={product.image} style={styles.popularImage} />
-            <Text>{product.name}</Text>
+            <Text
+              style={{
+                color: value.id === product.id ? colors.ACCENT : colors.TEXT
+              }}>
+              {product.name}
+            </Text>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       ))}
     </View>
   )

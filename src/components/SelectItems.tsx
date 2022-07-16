@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   TextStyle,
-  TouchableHighlight,
+  TouchableOpacity,
   View
 } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -14,6 +14,7 @@ import useTheme from '../styles/useTheme'
 interface SelectItemsProps {
   style?: StyleProp<TextStyle> | undefined
   items: Array<string>
+  value: string
   onItemChange: (newItem: string) => void
   testID?: string | undefined
 }
@@ -21,20 +22,22 @@ interface SelectItemsProps {
 const SelectItems: React.FC<SelectItemsProps> = ({
   style,
   items,
-  onItemChange
+  value,
+  onItemChange,
+  testID
 }) => {
   const theme = useTheme()
   const { colors } = theme
-  const isCategoryActive = (item: string) => item === items[0]
+  const isCategoryActive = (item: string) => item === value
 
   const firstLetterUpperCase = (str: string) =>
     str.charAt(0).toUpperCase() + str.slice(1)
 
   return (
-    <View style={[styles.items, style]}>
+    <View testID={testID} style={[styles.items, style]}>
       {items.map((item, index) => (
-        <TouchableHighlight
-          testID={`select-item-${index}`}
+        <TouchableOpacity
+          testID={`${testID}-${index}`}
           key={index}
           onPress={() => onItemChange(item)}>
           <View style={styles.item}>
@@ -53,7 +56,7 @@ const SelectItems: React.FC<SelectItemsProps> = ({
               />
             )}
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       ))}
     </View>
   )

@@ -13,6 +13,7 @@ it('renders correctly', () => {
   const onItemChange = jest.fn()
   const tree = renderer.create(
     <SelectItems
+      value={items[0]}
       items={items}
       onItemChange={onItemChange}
       style={{ backgroundColor: 'red' }}
@@ -23,7 +24,7 @@ it('renders correctly', () => {
 
 it('renders correctly with no items', () => {
   const tree = renderer.create(
-    <SelectItems items={[]} onItemChange={() => {}} />
+    <SelectItems value={[]} items={[]} onItemChange={() => {}} />
   )
   expect(tree).toMatchSnapshot()
 })
@@ -33,9 +34,14 @@ it('check if onItemChange is called', () => {
   const onItemChange = jest.fn()
   const testID = 'select-items'
   const { getByTestId } = render(
-    <SelectItems testID={testID} items={items} onItemChange={onItemChange} />
+    <SelectItems
+      value={items[0]}
+      testID={testID}
+      items={items}
+      onItemChange={onItemChange}
+    />
   )
-  const item = getByTestId('select-item-0')
+  const item = getByTestId('select-items-1')
   fireEvent.press(item)
-  expect(onItemChange).toHaveBeenCalledWith(items[0])
+  expect(onItemChange).toHaveBeenCalledWith(items[1])
 })

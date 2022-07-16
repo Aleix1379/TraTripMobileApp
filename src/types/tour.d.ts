@@ -1,5 +1,3 @@
-import { ImageSourcePropType } from 'react-native'
-
 interface Activity {
   id: number
   title: string

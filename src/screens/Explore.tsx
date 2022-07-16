@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {
   Image,
+  ImageSourcePropType,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -13,13 +14,18 @@ import ProductSelector from '../components/ProductSelector'
 
 interface ExploreProps {
   navigation: any
+  testID?: string | undefined
 }
 
 interface ExploreState {
   typeOfTours: Array<Product>
+  adventure: {
+    id: string
+    image: ImageSourcePropType
+  }
 }
 
-const Explore: React.FC<ExploreProps> = ({ navigation }) => {
+const Explore: React.FC<ExploreProps> = ({ navigation, testID }) => {
   const theme = useTheme()
   const { colors } = theme
 
@@ -45,13 +51,47 @@ const Explore: React.FC<ExploreProps> = ({ navigation }) => {
       image: require('../../assets/images/sight.png')
     }
   ])
+  const [typeTourSelected, setTypeTourSelected] = useState(typeOfTours[0])
+  const [adventures] = useState<Array<ExploreState['adventure']>>([
+    {
+      id: '1',
+      image: require('../../assets/images/adventure-1.png')
+    },
+    {
+      id: '3',
+      image: require('../../assets/images/adventure-3.png')
+    },
+    {
+      id: '2',
+      image: require('../../assets/images/adventure-2.png')
+    },
+    {
+      id: '4',
+      image: require('../../assets/images/adventure-4.png')
+    },
+    {
+      id: '5',
+      image: require('../../assets/images/adventure-4.png')
+    }
+  ])
 
-  const selectTypeOfTour = (typeOfTour: Product) => {
-    console.log('selectTypeOfTour', typeOfTour)
+  const selectTypeOfTour = (product: Product) => {
+    setTypeTourSelected(product)
   }
 
-  const goToTourDetails = (id: number) => {
+  const goToTourDetails = (id: string) => {
     navigation.navigate('TourDetails', { id })
+  }
+
+  const renderAdventure = (adventure: ExploreState['adventure']) => {
+    return (
+      <TouchableOpacity
+        testID={`adventure-${adventure.id}`}
+        key={adventure.id}
+        onPress={() => goToTourDetails(adventure.id)}>
+        <Image source={adventure.image} style={styles.image} />
+      </TouchableOpacity>
+    )
   }
 
   return (
@@ -60,6 +100,7 @@ const Explore: React.FC<ExploreProps> = ({ navigation }) => {
       <Text style={[styles.title, { color: colors.GREY }]}>Type of tour</Text>
       <ProductSelector
         items={typeOfTours}
+        value={typeTourSelected}
         onProductSelected={selectTypeOfTour}
         style={styles.productSelector}
       />
@@ -69,32 +110,14 @@ const Explore: React.FC<ExploreProps> = ({ navigation }) => {
 
       <View style={styles.images}>
         <View style={[styles.imageContainer, { marginRight: '2.5%' }]}>
-          <TouchableOpacity onPress={() => goToTourDetails(1)}>
-            <Image
-              style={styles.image}
-              source={require('../../assets/images/adventure-1.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => goToTourDetails(1)}>
-            <Image
-              style={styles.image}
-              source={require('../../assets/images/adventure-2.png')}
-            />
-          </TouchableOpacity>
+          {adventures
+            .filter((_, index) => index % 2 === 0)
+            .map(renderAdventure)}
         </View>
         <View style={[styles.imageContainer, { marginLeft: '2.5%' }]}>
-          <TouchableOpacity onPress={() => goToTourDetails(1)}>
-            <Image
-              style={styles.image}
-              source={require('../../assets/images/adventure-3.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => goToTourDetails(1)}>
-            <Image
-              style={styles.image}
-              source={require('../../assets/images/adventure-4.png')}
-            />
-          </TouchableOpacity>
+          {adventures
+            .filter((_, index) => index % 2 !== 0)
+            .map(renderAdventure)}
         </View>
       </View>
     </ScrollView>

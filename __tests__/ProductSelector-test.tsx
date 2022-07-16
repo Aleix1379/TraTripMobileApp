@@ -6,7 +6,6 @@ import ProductSelector from '../src/components/ProductSelector'
 import { fireEvent, render } from '@testing-library/react-native'
 
 it('renders correctly', () => {
-  const testID = 'list-id'
   const items: Array<Product> = [
     {
       id: 1,
@@ -17,7 +16,7 @@ it('renders correctly', () => {
   const onProductSelected = jest.fn()
   const tree = renderer.create(
     <ProductSelector
-      testID={testID}
+      value={items[0]}
       items={items}
       onProductSelected={onProductSelected}
     />
@@ -26,7 +25,6 @@ it('renders correctly', () => {
 })
 
 it('renders correctly with onProductSelected', () => {
-  const testID = 'list-id'
   const items: Array<Product> = [
     {
       id: 1,
@@ -42,17 +40,17 @@ it('renders correctly with onProductSelected', () => {
   const onProductSelected = jest.fn()
   const { getByTestId } = render(
     <ProductSelector
-      testID={testID}
+      value={items[0]}
       items={items}
       onProductSelected={onProductSelected}
     />
   )
-  fireEvent.press(getByTestId(`list-id-${items[0].id}`))
+  fireEvent.press(getByTestId(`select-products-${items[0].id}`))
   expect(onProductSelected).toHaveBeenCalledWith(items[0])
 })
 
 it('renders correctly with custom style props', () => {
-  const testID = 'list-id'
+  const testID = 'select-products'
   const items: Array<Product> = [
     {
       id: 1,
@@ -63,12 +61,12 @@ it('renders correctly with custom style props', () => {
   const onProductSelected = jest.fn()
   const tree = renderer.create(
     <ProductSelector
-      testID={testID}
+      value={items[0]}
       items={items}
       onProductSelected={onProductSelected}
       style={{ backgroundColor: 'red' }}
     />
   )
   const element = tree.root.findByProps({ testID: testID })
-  expect(element.props.style.backgroundColor).toBe('red')
+  expect(element.parent?.props.style.backgroundColor).toBe('red')
 })

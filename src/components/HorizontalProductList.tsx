@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Text,
   TextStyle,
-  TouchableHighlight,
+  TouchableOpacity,
   View
 } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -22,7 +22,7 @@ interface HorizontalProductListProps {
     width: number
     height: number
   }
-  onPress?: (id: number) => void
+  onPress: (id: number) => void
   testID?: string | undefined
 }
 
@@ -31,7 +31,7 @@ const HorizontalProductList: React.FC<HorizontalProductListProps> = ({
   style,
   imageSize,
   onPress,
-  testID
+  testID = ''
 }) => {
   const theme = useTheme()
   const { colors } = theme
@@ -55,10 +55,10 @@ const HorizontalProductList: React.FC<HorizontalProductListProps> = ({
     index: number
   }) => {
     return (
-      <TouchableHighlight
-        testID={`${testID}-${item.id}`}
+      <TouchableOpacity
+        testID={`${testID}-horizontal-product-list-${item.id}`}
         key={item.id}
-        onPress={() => onPress && onPress(item.id)}>
+        onPress={() => onPress(item.id)}>
         <View>
           <View
             style={[
@@ -115,7 +115,7 @@ const HorizontalProductList: React.FC<HorizontalProductListProps> = ({
             </View>
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 

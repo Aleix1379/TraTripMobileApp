@@ -27,13 +27,11 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
 
   const [tours] = useState<Array<Tour>>(jsonTours)
 
-  const [selectedTour, setSelectedTour] = useState(tours[0])
+  const [selectedTour, setSelectedTour] = useState<Tour | undefined>()
 
   useEffect(() => {
     const data = tours.find(tour => tour.id === id)
-    if (data) {
-      setSelectedTour(data)
-    }
+    setSelectedTour(data)
   }, [])
 
   const formatDate = (date: string) => {
@@ -62,6 +60,10 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
     'marina-bay-sands.png': require('../../assets/images/marina-bay-sands.png'),
     'gardens-by-the-bay.png': require('../../assets/images/gardens-by-the-bay.png')
   })
+
+  if (!selectedTour) {
+    return <></>
+  }
 
   return (
     <View style={[styles.tourDetails, { backgroundColor: colors.BACKGROUND }]}>

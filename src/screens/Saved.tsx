@@ -12,17 +12,16 @@ import jsonTrips from '../../assets/data/trips.json'
 import HorizontalProductList from '../components/HorizontalProductList'
 import jsonTours from '../../assets/data/tours.json'
 import { Tour } from '../types/tour'
-import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
 
-type homeScreenProp = StackNavigationProp<any>
+interface SavedProps {
+  navigation: any
+}
 
-const Saved = () => {
+const Saved: React.FC<SavedProps> = ({ navigation }) => {
   const theme = useTheme()
   const { colors } = theme
   const [trips] = useState<Array<Trip>>(jsonTrips)
   const [tours] = useState<Array<Tour>>(jsonTours)
-  const navigation = useNavigation<homeScreenProp>()
   const [images] = useState<{ [key: string]: ImageSourcePropType }>({
     'tajmahal.png': require('../../assets/images/tajmahal.png'),
     'paris.png': require('../../assets/images/paris.png'),
@@ -40,6 +39,7 @@ const Saved = () => {
     <ScrollView style={[styles.saved, { backgroundColor: colors.BACKGROUND }]}>
       <Text style={[styles.title, { color: colors.GREY }]}>Your trips</Text>
       <HorizontalProductList
+        testID={'trips'}
         onPress={(id: number) => navigation.navigate('TripDetails', { id })}
         items={trips.map(trip => ({
           id: trip.id,
@@ -56,6 +56,7 @@ const Saved = () => {
 
       <Text style={[styles.title, { color: colors.GREY }]}>Your tours</Text>
       <HorizontalProductList
+        testID={'tours'}
         onPress={(id: number) => navigation.navigate('TourDetails', { id })}
         items={tours.map(tour => ({
           id: tour.id,

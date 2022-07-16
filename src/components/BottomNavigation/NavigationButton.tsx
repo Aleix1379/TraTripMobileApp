@@ -1,9 +1,9 @@
 import {
-  View,
-  Text,
-  StyleSheet,
   Animated,
-  TouchableHighlight
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
@@ -11,10 +11,10 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import useTheme from '../../styles/useTheme'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {
-  faHome,
-  faCompass,
   faBell,
-  faHeart
+  faCompass,
+  faHeart,
+  faHome
 } from '@fortawesome/free-solid-svg-icons'
 
 type homeScreenProp = StackNavigationProp<any>
@@ -51,7 +51,7 @@ const NavButton: React.FC<NavButtonProps> = ({
     Animated.timing(upperAnimation, {
       useNativeDriver: true,
       toValue: isActive ? 1 : 0,
-      duration: 350
+      duration: 200
     }).start()
   }
 
@@ -74,7 +74,7 @@ const NavButton: React.FC<NavButtonProps> = ({
 
   return (
     <View style={[styles.bar, { backgroundColor: colors.BACKGROUND }]}>
-      <TouchableHighlight
+      <TouchableWithoutFeedback
         testID={`${testID}-button`}
         onPress={() => navigation.navigate(to)}>
         <View style={[styles.item]}>
@@ -95,7 +95,7 @@ const NavButton: React.FC<NavButtonProps> = ({
           />
           <Text style={[styles.label]}>{label}</Text>
         </View>
-      </TouchableHighlight>
+      </TouchableWithoutFeedback>
     </View>
   )
 }

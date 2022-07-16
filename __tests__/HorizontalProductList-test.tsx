@@ -10,7 +10,7 @@ jest.mock('@fortawesome/react-native-fontawesome', () => ({
 }))
 
 it('renders correctly', () => {
-  const testID = 'list-id'
+  const onPress = jest.fn()
   const items: Array<CatalogItem> = [
     {
       id: 1,
@@ -20,13 +20,13 @@ it('renders correctly', () => {
     }
   ]
   const tree = renderer.create(
-    <HorizontalProductList testID={testID} items={items} />
+    <HorizontalProductList items={items} onPress={onPress} />
   )
   expect(tree).toMatchSnapshot()
 })
 
 it('renders correctly with 3 products', () => {
-  const testID = 'list-id'
+  const onPress = jest.fn()
   const items: Array<CatalogItem> = [
     {
       id: 1,
@@ -48,14 +48,14 @@ it('renders correctly with 3 products', () => {
     }
   ]
   const tree = renderer.create(
-    <HorizontalProductList testID={testID} items={items} />
+    <HorizontalProductList items={items} onPress={onPress} />
   )
   expect(tree).toMatchSnapshot()
 })
 
 // test with custom image size
 it('renders correctly with custom image size', () => {
-  const testID = 'list-id'
+  const onPress = jest.fn()
   const items: Array<CatalogItem> = [
     {
       id: 1,
@@ -66,8 +66,8 @@ it('renders correctly with custom image size', () => {
   ]
   const tree = renderer.create(
     <HorizontalProductList
-      testID={testID}
       items={items}
+      onPress={onPress}
       imageSize={{ width: 100, height: 100 }}
     />
   )
@@ -75,7 +75,6 @@ it('renders correctly with custom image size', () => {
 })
 
 it('renders correctly with onPress', () => {
-  const testID = 'list-id'
   const items: Array<CatalogItem> = [
     {
       id: 1,
@@ -92,16 +91,15 @@ it('renders correctly with onPress', () => {
   ]
   const onPress = jest.fn()
   const { getByTestId } = render(
-    <HorizontalProductList testID={testID} items={items} onPress={onPress} />
+    <HorizontalProductList items={items} onPress={onPress} />
   )
 
-  const item = getByTestId(`${testID}-${items[0].id}`)
+  const item = getByTestId(`-horizontal-product-list-${items[0].id}`)
   fireEvent.press(item)
   expect(onPress).toHaveBeenCalledWith(items[0].id)
 })
 
 it('renders correctly with custom style props', () => {
-  const testID = 'list-id'
   const items: Array<CatalogItem> = [
     {
       id: 1,
@@ -112,10 +110,10 @@ it('renders correctly with custom style props', () => {
   ]
   const onPress = jest.fn()
   const { getByTestId } = render(
-    <HorizontalProductList testID={testID} items={items} />
+    <HorizontalProductList items={items} onPress={onPress} />
   )
 
-  const item = getByTestId(`${testID}-${items[0].id}`)
+  const item = getByTestId(`-horizontal-product-list-${items[0].id}`)
   fireEvent.press(item)
   expect(onPress).not.toHaveBeenCalledWith()
 })

@@ -10,12 +10,14 @@ interface SearchBarProps {
   style?: StyleProp<TextStyle> | undefined
   title: string
   testID?: string | undefined
+  value?: string
   onTextChange?: (text: string) => void
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
   style,
   title,
+  value,
   onTextChange,
   testID
 }) => {
@@ -25,9 +27,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <View style={[style, styles.searchBar, { backgroundColor: colors.SHADOW }]}>
       <TextInput
-        testID={`${testID}-input`}
+        testID={'search-bar-input'}
         style={[styles.input, { color: colors.GREY }]}
         placeholder={title}
+        value={value}
         onChangeText={onTextChange}
       />
       <View style={[styles.icon, { backgroundColor: colors.ACCENT }]}>
