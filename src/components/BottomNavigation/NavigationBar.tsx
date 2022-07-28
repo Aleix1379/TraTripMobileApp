@@ -14,10 +14,12 @@ const NavigationBar: React.FC<BottomNavigationProps> = () => {
   const [isInDetailPage, setIsInDetailPage] = useState(false)
 
   useEffect(() => {
-    const currentRoute =
-      navigationState.routes[navigationState.routes.length - 1].name
-    setCurrentScreen(currentRoute)
-    setIsInDetailPage(isDetailPage(currentRoute))
+    if (navigationState) {
+      const currentRoute =
+        navigationState.routes[navigationState.routes.length - 1].name
+      setCurrentScreen(currentRoute)
+      setIsInDetailPage(isDetailPage(currentRoute))
+    }
   }, [navigationState])
 
   return (
