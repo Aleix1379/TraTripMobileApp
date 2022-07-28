@@ -1,5 +1,22 @@
 [
   {
+    "id": 3,
+    "image": "barcelona.png",
+    "city": "Barcelona",
+    "country": "Spain",
+    "price": "$1360",
+    "rating": {
+      "score": 4.9,
+      "votes": 12436
+    },
+    "information": {
+      "overview": "Barcelona is a city in Spain.",
+      "details": "It is the capital of Catalonia and the second largest city in Spain.",
+      "reviews": "I love Barcelona!",
+      "costs": "The city is cheap."
+    }
+  },
+  {
     "id": 1,
     "image": "tajmahal.png",
     "city": "Tajmahal",
@@ -31,23 +48,6 @@
       "details": "Paris is the capital of France and one of the most populous cities in Europe.",
       "reviews": "Paris is a great city to visit.",
       "costs": "The city is expensive."
-    }
-  },
-  {
-    "id": 3,
-    "image": "barcelona.png",
-    "city": "Barcelona",
-    "country": "Spain",
-    "price": "$1360",
-    "rating": {
-      "score": 4.9,
-      "votes": 12436
-    },
-    "information": {
-      "overview": "Barcelona is a city in Spain.",
-      "details": "It is the capital of Catalonia and the second largest city in Spain.",
-      "reviews": "I love Barcelona!",
-      "costs": "The city is cheap."
     }
   }
 ]
