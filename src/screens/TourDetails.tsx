@@ -21,7 +21,7 @@ interface TourDetailsProps {
 }
 
 const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
-  const { id } = route.params
+  const id = Number(route.params.id)
   const theme = useTheme()
   const { colors } = theme
 
