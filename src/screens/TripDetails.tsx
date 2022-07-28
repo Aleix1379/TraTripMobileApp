@@ -41,10 +41,10 @@ const TripDetails: React.FC<TripDetailsProps> = ({ route, testID }) => {
   }, [])
 
   const formatVotes = (votes: number) => {
-    if (votes >= 1000 && votes < 10000) {
-      return '(' + votes / 1000 + 'K)'
-    } else if (votes >= 10000 && votes < 100000) {
-      return '(' + votes / 10000 + 'M)'
+    if (votes >= 10000 && votes < 100000) {
+      return '(' + Math.round(votes / 1000) + 'K)'
+    } else if (votes >= 100000 && votes < 1000000) {
+      return '(' + Math.round(votes / 10000) + 'M)'
     } else {
       return '(' + votes + ')'
     }
@@ -52,7 +52,8 @@ const TripDetails: React.FC<TripDetailsProps> = ({ route, testID }) => {
 
   const [images] = useState<{ [key: string]: ImageSourcePropType }>({
     'tajmahal.png': require('../../assets/images/tajmahal.png'),
-    'paris.png': require('../../assets/images/paris.png')
+    'paris.png': require('../../assets/images/paris.png'),
+    'barcelona.png': require('../../assets/images/barcelona.png')
   })
 
   return (
