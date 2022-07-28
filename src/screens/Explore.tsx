@@ -20,7 +20,7 @@ interface ExploreProps {
 interface ExploreState {
   typeOfTours: Array<Product>
   adventure: {
-    id: string
+    id: number
     image: ImageSourcePropType
   }
 }
@@ -54,23 +54,23 @@ const Explore: React.FC<ExploreProps> = ({ navigation, testID }) => {
   const [typeTourSelected, setTypeTourSelected] = useState(typeOfTours[0])
   const [adventures] = useState<Array<ExploreState['adventure']>>([
     {
-      id: '1',
+      id: 1,
       image: require('../../assets/images/adventure-1.png')
     },
     {
-      id: '3',
+      id: 1,
       image: require('../../assets/images/adventure-3.png')
     },
     {
-      id: '2',
+      id: 1,
       image: require('../../assets/images/adventure-2.png')
     },
     {
-      id: '4',
+      id: 1,
       image: require('../../assets/images/adventure-4.png')
     },
     {
-      id: '5',
+      id: 1,
       image: require('../../assets/images/adventure-4.png')
     }
   ])
@@ -79,15 +79,18 @@ const Explore: React.FC<ExploreProps> = ({ navigation, testID }) => {
     setTypeTourSelected(product)
   }
 
-  const goToTourDetails = (id: string) => {
+  const goToTourDetails = (id: number) => {
     navigation.navigate('TourDetails', { id })
   }
 
-  const renderAdventure = (adventure: ExploreState['adventure']) => {
+  const renderAdventure = (
+    adventure: ExploreState['adventure'],
+    index: number
+  ) => {
     return (
       <TouchableOpacity
         testID={`adventure-${adventure.id}`}
-        key={adventure.id}
+        key={index}
         onPress={() => goToTourDetails(adventure.id)}>
         <Image source={adventure.image} style={styles.image} />
       </TouchableOpacity>
@@ -112,12 +115,12 @@ const Explore: React.FC<ExploreProps> = ({ navigation, testID }) => {
         <View style={[styles.imageContainer, { marginRight: '2.5%' }]}>
           {adventures
             .filter((_, index) => index % 2 === 0)
-            .map(renderAdventure)}
+            .map((adventure, index) => renderAdventure(adventure, index))}
         </View>
         <View style={[styles.imageContainer, { marginLeft: '2.5%' }]}>
           {adventures
             .filter((_, index) => index % 2 !== 0)
-            .map(renderAdventure)}
+            .map((adventure, index) => renderAdventure(adventure, index))}
         </View>
       </View>
     </ScrollView>
