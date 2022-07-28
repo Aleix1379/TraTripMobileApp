@@ -62,7 +62,8 @@ const Home: React.FC<HomeProps> = ({ navigation, testID }) => {
   )
   const [images] = useState<{ [key: string]: ImageSourcePropType }>({
     'tajmahal.png': require('../../assets/images/tajmahal.png'),
-    'paris.png': require('../../assets/images/paris.png')
+    'paris.png': require('../../assets/images/paris.png'),
+    'barcelona.png': require('../../assets/images/barcelona.png')
   })
   const [trips] = useState<Array<Trip>>(jsonTrips)
 

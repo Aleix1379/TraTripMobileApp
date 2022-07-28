@@ -25,7 +25,8 @@ const Saved: React.FC<SavedProps> = ({ navigation }) => {
   const [images] = useState<{ [key: string]: ImageSourcePropType }>({
     'tajmahal.png': require('../../assets/images/tajmahal.png'),
     'paris.png': require('../../assets/images/paris.png'),
-    'signapore.png': require('../../assets/images/signapore.png')
+    'signapore.png': require('../../assets/images/signapore.png'),
+    'barcelona.png': require('../../assets/images/barcelona.png')
   })
 
   const getItemSize = () => {
