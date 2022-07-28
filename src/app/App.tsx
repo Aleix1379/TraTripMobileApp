@@ -6,7 +6,6 @@ import Explore from '../screens/Explore'
 import NavigationBar from '../components/BottomNavigation/NavigationBar'
 import { SafeAreaView } from 'react-native'
 import ThemeProvider from '../styles/ThemeProvider'
-import Notifications from '../screens/Notifications'
 import Saved from '../screens/Saved'
 import useTheme from '../styles/useTheme'
 import TripDetails from '../screens/TripDetails'
@@ -58,11 +57,6 @@ const App = () => {
               options={{
                 header: () => <HeaderExplore title={'Search your trip'} />
               }}
-            />
-            <Stack.Screen
-              name="News"
-              component={Notifications}
-              options={{ header: () => <HomeHeader /> }}
             />
             <Stack.Screen
               name="Saved"

@@ -40,13 +40,6 @@ const NavigationBar: React.FC<BottomNavigationProps> = () => {
           isActive={currentScreen === 'Explore'}
         />
         <NavigationButton
-          testID={'nav-notification'}
-          label={'News'}
-          to={'News'}
-          icon={'notification'}
-          isActive={currentScreen === 'News'}
-        />
-        <NavigationButton
           testID={'nav-heart'}
           label={'Saved'}
           to={'Saved'}
