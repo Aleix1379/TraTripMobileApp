@@ -1,10 +1,10 @@
 {
-  "name": "tratripmobileapp",
+  "name": "TrapTripMobileApp",
   "version": "0.0.1",
   "license": "GPL-3.0",
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator=\"iPhone 14\"",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
