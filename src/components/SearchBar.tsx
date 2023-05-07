@@ -29,6 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <TextInput
         testID={'search-bar-input'}
         style={[styles.input, { color: colors.GREY }]}
+        placeholderTextColor={colors.GREY}
         placeholder={title}
         value={value}
         onChangeText={onTextChange}

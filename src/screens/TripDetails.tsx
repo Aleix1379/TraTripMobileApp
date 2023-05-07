@@ -27,6 +27,42 @@ const TripDetails: React.FC<TripDetailsProps> = ({ route, testID }) => {
   const theme = useTheme()
   const { colors } = theme
 
+  const styles = StyleSheet.create({
+    tripDetails: {
+      flex: 1
+    },
+    image: {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height * 0.5,
+      position: 'absolute'
+    },
+
+    header: {
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    title: {
+      fontSize: 30,
+      marginTop: 10
+    },
+    score: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginTop: 15,
+      marginBottom: 5
+    },
+    description: {
+      lineHeight: 22,
+      marginVertical: 10,
+      height: 50
+    },
+    controls: {
+      marginTop: 30,
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+    }
+  })
+
   const [trips] = useState<Array<Trip>>(jsonTrips)
   const [trip, setTrip] = useState<Trip | null>(null)
 
@@ -84,9 +120,15 @@ const TripDetails: React.FC<TripDetailsProps> = ({ route, testID }) => {
           </View>
           <View style={styles.score}>
             <FontAwesomeIcon icon={faStar} color={'#FF9900'} size={20} />
-            <Text style={{ marginHorizontal: 8 }}>{trip.rating.score}</Text>
-            <Text>{formatVotes(trip.rating.votes)}</Text>
-            <Text style={{ marginLeft: 'auto' }}>* Estimated Cost</Text>
+            <Text style={{ marginHorizontal: 8, color: colors.GREY }}>
+              {trip.rating.score}
+            </Text>
+            <Text style={{ color: colors.GREY }}>
+              {formatVotes(trip.rating.votes)}
+            </Text>
+            <Text style={{ marginLeft: 'auto', color: colors.GREY }}>
+              * Estimated Cost
+            </Text>
           </View>
 
           <SelectItems
@@ -148,41 +190,5 @@ const TripDetails: React.FC<TripDetailsProps> = ({ route, testID }) => {
     )
   )
 }
-
-const styles = StyleSheet.create({
-  tripDetails: {
-    flex: 1
-  },
-  image: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.5,
-    position: 'absolute'
-  },
-
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  title: {
-    fontSize: 30,
-    marginTop: 10
-  },
-  score: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 15,
-    marginBottom: 5
-  },
-  description: {
-    lineHeight: 22,
-    marginVertical: 10,
-    height: 50
-  },
-  controls: {
-    marginTop: 30,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  }
-})
 
 export default TripDetails

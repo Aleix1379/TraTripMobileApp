@@ -45,7 +45,13 @@ const TripItemDetail: React.FC<TripItemDetailProps> = ({ type, value }) => {
         {item && (
           <FontAwesomeIcon icon={item.icon} color={item.color} size={18} />
         )}
-        <Text style={{ marginLeft: 8, fontWeight: 'bold', fontSize: 18 }}>
+        <Text
+          style={{
+            marginLeft: 8,
+            fontWeight: 'bold',
+            fontSize: 18,
+            color: colors.GREY
+          }}>
           {value}
         </Text>
       </View>

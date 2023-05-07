@@ -6,7 +6,8 @@ import {
   Image,
   Dimensions,
   ScrollView,
-  ImageSourcePropType
+  ImageSourcePropType,
+  Platform
 } from 'react-native'
 import useTheme from '../styles/useTheme'
 import BottomSheet from '../components/BottomSheet'
@@ -79,8 +80,8 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
         <Text
           style={{
             fontSize: 16,
-            color: colors.GREY,
-            backgroundColor: 'rgba(34,34,34,0.85)',
+            color: colors.TEXT,
+            backgroundColor: 'rgba(34,34,34,0.45)',
             paddingHorizontal: 8,
             paddingVertical: 3
           }}>
@@ -90,15 +91,16 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
           style={{
             fontSize: 35,
             fontWeight: 'bold',
-            backgroundColor: 'rgba(34,34,34,0.85)',
+            backgroundColor: 'rgba(34,34,34,0.45)',
             paddingHorizontal: 8,
-            paddingVertical: 3
+            paddingVertical: 3,
+            color: colors.TEXT
           }}>
           {selectedTour.city}
         </Text>
         <View
           style={{
-            backgroundColor: 'rgba(34,34,34,0.85)',
+            backgroundColor: 'rgba(34,34,34,0.45)',
             paddingHorizontal: 8,
             paddingBottom: 8,
             paddingTop: 15
@@ -141,7 +143,7 @@ const TourDetails: React.FC<TourDetailsProps> = ({ route }) => {
                     ]}
                   />
                 </View>
-                <Text style={{ marginLeft: 12 }}>
+                <Text style={{ marginLeft: 12, color: colors.GREY }}>
                   {formatDate(activity.date)}
                 </Text>
               </View>
@@ -253,9 +255,10 @@ const styles = StyleSheet.create({
     marginLeft: 12
   },
   separator: {
-    height: '100%',
+    height: '80%',
+    marginBottom: '2%',
     borderLeftWidth: 1,
-    borderStyle: 'dashed',
+    borderStyle: Platform.OS === 'ios' ? 'solid' : 'dashed',
     marginRight: 35,
     left: 12
   },

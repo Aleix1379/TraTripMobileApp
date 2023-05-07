@@ -38,6 +38,39 @@ const NavButton: React.FC<NavButtonProps> = ({
   const theme = useTheme()
   const { colors } = theme
 
+  const styles = StyleSheet.create({
+    bar: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      height: 60,
+      justifyContent: 'center'
+    },
+    item: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 8,
+      borderRadius: 15,
+      overflow: 'hidden'
+    },
+    button: {},
+    label: {
+      fontWeight: 'bold',
+      marginLeft: 8,
+      fontSize: 12,
+      color: colors.TEXT
+    },
+    background: {
+      height: 38,
+      width: '128%',
+      borderRadius: 15,
+      padding: 8,
+      position: 'absolute',
+      top: 0,
+      left: 0
+    }
+  })
+
   const icons = {
     home: faHome,
     location: faCompass,
@@ -99,37 +132,5 @@ const NavButton: React.FC<NavButtonProps> = ({
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  bar: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 60,
-    justifyContent: 'center'
-  },
-  item: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 8,
-    borderRadius: 15,
-    overflow: 'hidden'
-  },
-  button: {},
-  label: {
-    fontWeight: 'bold',
-    marginLeft: 8,
-    fontSize: 12
-  },
-  background: {
-    height: 38,
-    width: '128%',
-    borderRadius: 15,
-    padding: 8,
-    position: 'absolute',
-    top: 0,
-    left: 0
-  }
-})
 
 export default NavButton

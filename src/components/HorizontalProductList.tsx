@@ -36,6 +36,51 @@ const HorizontalProductList: React.FC<HorizontalProductListProps> = ({
   const theme = useTheme()
   const { colors } = theme
 
+  const styles = StyleSheet.create({
+    trips: {
+      flexDirection: 'row'
+    },
+    tripImage: {
+      borderRadius: 30,
+      resizeMode: 'cover',
+      width: '100%',
+      height: '100%'
+    },
+    tripDetails: {
+      position: 'absolute',
+      left: 0,
+      bottom: 8,
+      zIndex: 1000
+    },
+    tripText: {
+      fontSize: 16
+    },
+    heart: {
+      backgroundColor: '#ddd',
+      width: 28,
+      height: 28,
+      borderRadius: 14,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    description: {
+      flexDirection: 'row',
+      paddingHorizontal: 4,
+      paddingVertical: 2,
+      color: colors.TEXT
+    },
+    tripImageOverlay: {
+      backgroundColor: '#000',
+      height: '100%',
+      width: '100%',
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      opacity: 0.65,
+      borderRadius: 30
+    }
+  })
+
   const getTripImageSize = () => {
     if (!imageSize) {
       return {
@@ -128,49 +173,5 @@ const HorizontalProductList: React.FC<HorizontalProductListProps> = ({
     />
   )
 }
-
-const styles = StyleSheet.create({
-  trips: {
-    flexDirection: 'row'
-  },
-  tripImage: {
-    borderRadius: 30,
-    resizeMode: 'cover',
-    width: '100%',
-    height: '100%'
-  },
-  tripDetails: {
-    position: 'absolute',
-    left: 0,
-    bottom: 8,
-    zIndex: 1000
-  },
-  tripText: {
-    fontSize: 16
-  },
-  heart: {
-    backgroundColor: '#ddd',
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  description: {
-    flexDirection: 'row',
-    paddingHorizontal: 4,
-    paddingVertical: 2
-  },
-  tripImageOverlay: {
-    backgroundColor: '#000',
-    height: '100%',
-    width: '100%',
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    opacity: 0.5,
-    borderRadius: 30
-  }
-})
 
 export default HorizontalProductList
