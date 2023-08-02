@@ -8,9 +8,6 @@ import { Product } from '../types/product'
 import HorizontalProductList from '../components/HorizontalProductList'
 import { Trip } from '../types/trip'
 import jsonTrips from '../../assets/data/trips.json'
-import { StackNavigationProp } from '@react-navigation/stack'
-
-type homeScreenProp = StackNavigationProp<any>
 
 interface HomeProps {
   navigation: any

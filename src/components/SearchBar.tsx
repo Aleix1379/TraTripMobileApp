@@ -9,7 +9,6 @@ const ICON_SIZE = 30
 interface SearchBarProps {
   style?: StyleProp<TextStyle> | undefined
   title: string
-  testID?: string | undefined
   value?: string
   onTextChange?: (text: string) => void
 }
@@ -18,8 +17,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   style,
   title,
   value,
-  onTextChange,
-  testID
+  onTextChange
 }) => {
   const theme = useTheme()
   const { colors } = theme
